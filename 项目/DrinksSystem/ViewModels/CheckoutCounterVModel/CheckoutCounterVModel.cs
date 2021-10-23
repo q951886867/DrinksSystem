@@ -256,7 +256,7 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
                 var salesRecordID = WaitingAreaEntity.salesRecordID;
                 B_SalesRecord mySalesRecord = new B_SalesRecord();
                 mySalesRecord = (from tb in myModel.B_SalesRecord where tb.salesRecordID == salesRecordID select tb).Single();
-                mySalesRecord.orderStatus = true;//修改为制作完成
+                mySalesRecord.orderStatus = true;//修改为制作完成 12
                 myModel.Entry(mySalesRecord).State = EntityState.Modified;
                 if (myModel.SaveChanges()>0)
                 {
