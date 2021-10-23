@@ -22,7 +22,7 @@ bld/
 [Oo]bj/
 
 # Visual Studio 2015 cache/options directory
-.vs/
+\351\241\271\347\233\256/DrinksSystem/.vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
