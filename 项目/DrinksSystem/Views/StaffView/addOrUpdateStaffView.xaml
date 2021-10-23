@@ -1,0 +1,114 @@
+﻿<Window x:Class="DrinksSystem.Views.StaffView.addOrUpdateStaffView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        x:Name="addOrUpdateWindow"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen" 
+        ResizeMode="NoResize"
+        WindowState="Maximized" 
+        AllowsTransparency="True"
+        Background="#AA3E3E3E"
+        Title="addOrUpadteProduc" Height="1080" Width="1920">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.Resources>
+        <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+    </Window.Resources>
+    <Border x:Name="border1" Width="800" Height="500" Background="#fbfbfd"  CornerRadius="3">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.1*"/>
+                <RowDefinition Height="6.5*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <TextBlock Text="{Binding WindowTitle}" FontSize="16" VerticalAlignment="Center"  Foreground="#2c68ff"
+                           Margin="20 0 0 0"/>
+                <Border BorderThickness="0 0 0 1" BorderBrush="#dfe4ea" Margin="20 0 20 0"></Border>
+                <Button Style="{StaticResource MaterialDesignRaisedLightButton}" ToolTip="CloseWindow"
+                        Width="50" HorizontalAlignment="Right" Foreground="#1d1d1f " Margin="0 0 0 0" Background="{x:Null}" BorderBrush="{x:Null}"
+                        Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=addOrUpdateWindow}">
+                    <materialDesign:PackIcon Kind="WindowClose" >
+                    </materialDesign:PackIcon>
+                </Button>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" ItemHeight="70" ItemWidth="320" Grid.Column="1">
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock Text="员工名称：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
+                        <TextBox  Text="{Binding StaffData.staffName,Mode=TwoWay}" Height="35" Width="200" pu:TextBoxHelper.Watermark="请输入" pu:TextBoxHelper.FocusedBorderBrush="#B5B5B5" 
+                                  pu:TextBoxHelper.FocusedShadowColor="#B5B5B5" pu:TextBoxHelper.CornerRadius="3" 
+                                  pu:TextBoxHelper.IsClearButtonVisible="True"  Margin="15 0 0 0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Text="地址：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding StaffData.staffAddress,Mode=TwoWay}"  Height="35" Width="200" pu:TextBoxHelper.Watermark="请输入" pu:TextBoxHelper.FocusedBorderBrush="#B5B5B5" 
+                                  pu:TextBoxHelper.FocusedShadowColor="#B5B5B5" pu:TextBoxHelper.CornerRadius="3" 
+                                  pu:TextBoxHelper.IsClearButtonVisible="True"  Margin="15 0 0 0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock Text="所属职位：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
+                        <ComboBox Width="200" materialDesign:HintAssist.Hint="OS" Margin="15 0 0 0" 
+                                  Padding="5 0 0 0 "
+                                  materialDesign:HintAssist.HintOpacity=".26" Height="35" 
+                                  ItemsSource="{Binding PositionComboBox}" SelectedValue="{Binding StaffData.positionID}"
+                                  DisplayMemberPath="dictionaryName" SelectedValuePath="dictionaryID">
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Text="性别：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
+                        <ComboBox Width="200" materialDesign:HintAssist.Hint="OS" Margin="15 0 0 0" 
+                                  Padding="5 0 0 0 "
+                                  materialDesign:HintAssist.HintOpacity=".26" Height="35" 
+                                  ItemsSource="{Binding SexComboBox}" SelectedValue="{Binding StaffData.sexID}"
+                                  DisplayMemberPath="dictionaryName" SelectedValuePath="dictionaryID">
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock Text="员工账号：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
+                        <TextBox  Text="{Binding StaffData.staffNumber,Mode=TwoWay}" Height="35" Width="200" pu:TextBoxHelper.Watermark="请输入" pu:TextBoxHelper.FocusedBorderBrush="#B5B5B5" 
+                                  pu:TextBoxHelper.FocusedShadowColor="#B5B5B5" pu:TextBoxHelper.CornerRadius="3" 
+                                  pu:TextBoxHelper.IsClearButtonVisible="True"  Margin="15 0 0 0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Text="员工密码：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
+                        <TextBox  Text="{Binding StaffData.staffPassword,Mode=TwoWay}" Height="35" Width="200" pu:TextBoxHelper.Watermark="请输入" pu:TextBoxHelper.FocusedBorderBrush="#B5B5B5" 
+                                  pu:TextBoxHelper.FocusedShadowColor="#B5B5B5" pu:TextBoxHelper.CornerRadius="3" 
+                                  pu:TextBoxHelper.IsClearButtonVisible="True"  Margin="15 0 0 0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="320">
+                        <TextBlock Text="电话号码：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
+                        <TextBox  Text="{Binding StaffData.staffPhone,Mode=TwoWay}" Height="35" Width="200" pu:TextBoxHelper.Watermark="请输入" pu:TextBoxHelper.FocusedBorderBrush="#B5B5B5" 
+                                  pu:TextBoxHelper.FocusedShadowColor="#B5B5B5" pu:TextBoxHelper.CornerRadius="3" 
+                                  pu:TextBoxHelper.IsClearButtonVisible="True"  Margin="15 0 0 0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Text="后台授权：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
+                        <Border Height="35" Width="200" Margin="15 0 0 0">
+                            <CheckBox  Height="30" IsChecked="{Binding StaffData.ifWarrant}" Content="未授权"
+                                       pu:CheckBoxHelper.CheckedContent="已授权" pu:CheckBoxHelper.CheckBoxStyle="Switch" 
+                                       pu:CheckBoxHelper.BoxHeight="20" pu:CheckBoxHelper.BoxWidth="35"
+                                       pu:CheckBoxHelper.CheckedBackground="#2c68ff" Cursor="Hand"/>
+                        </Border>
+                    </StackPanel>
+                </WrapPanel>
+                
+            </Grid>
+            <Border Grid.Row="1" BorderThickness="0 0 0 1" BorderBrush="#dfe4ea" Margin="20 0 20 0"></Border>
+
+            <Grid Grid.Row="3">
+                <Button Margin="10 0 5 0" Width="150" Height="35" Style="{StaticResource MaterialDesignFlatLightBgButton}" ToolTip="新增产品" Background="#2c68ff" BorderBrush="#2c68ff"
+                            Foreground="#f5f5f7"
+                            Content="提交" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=addOrUpdateWindow}"/>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

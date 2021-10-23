@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DrinksSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="B_Handover">
+    <Key>
+      <PropertyRef Name="handoverID" />
+    </Key>
+    <Property Name="handoverID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="staffID" Type="Int32" />
+    <Property Name="startTime" Type="DateTime" Precision="3" />
+    <Property Name="endTime" Type="DateTime" Precision="3" />
+    <Property Name="cashIncome" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="wechatIncome" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="amountHanded" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="reserveFund" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="businessAmount" Type="Decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="B_MemberRechargeRecord">
+    <Key>
+      <PropertyRef Name="memberRechargeID" />
+    </Key>
+    <Property Name="memberRechargeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="memberID" Type="Int32" />
+    <Property Name="staffID" Type="Int32" />
+    <Property Name="rechargeAmount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="promotionalAmount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="promotionalIntegral" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="totalAmount" Type="Decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="B_SalesRecord">
+    <Key>
+      <PropertyRef Name="salesRecordID" />
+    </Key>
+    <Property Name="salesRecordID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="salesNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="salesTime" Type="DateTime" Precision="3" />
+    <Property Name="staffID" Type="Int32" />
+    <Property Name="ifTakeout" Type="Boolean" />
+    <Property Name="cashPay" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="wechatPay" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="ifMember" Type="Boolean" />
+    <Property Name="memberID" Type="Int32" />
+    <Property Name="orderStatus" Type="Boolean" />
+    <Property Name="ifRedeem" Type="Boolean" />
+    <Property Name="salesAmount" Type="Decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="B_SalesRecordDetails">
+    <Key>
+      <PropertyRef Name="salesDetailsID" />
+    </Key>
+    <Property Name="salesDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="salesRecordID" Type="Int32" />
+    <Property Name="productID" Type="Int32" />
+    <Property Name="taste" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="quantity" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="ifDamaged" Type="Boolean" />
+    <Property Name="completedState" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="S_Dictionary">
+    <Key>
+      <PropertyRef Name="dictionaryID" />
+    </Key>
+    <Property Name="dictionaryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dictionaryType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="dictionaryName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="S_Member">
+    <Key>
+      <PropertyRef Name="memberID" />
+    </Key>
+    <Property Name="memberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="memberNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="memberName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="memberBalance" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="memberPoints" Type="Decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="S_Product">
+    <Key>
+      <PropertyRef Name="productID" />
+    </Key>
+    <Property Name="productID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="productName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="productNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="productTypeID" Type="Int32" />
+    <Property Name="cupTypeID" Type="Int32" />
+    <Property Name="productPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="productCost" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="memberPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="productIntegral" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="productImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="S_Staff">
+    <Key>
+      <PropertyRef Name="staffID" />
+    </Key>
+    <Property Name="staffID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="staffNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="staffPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="staffName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="staffPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="sexID" Type="Int32" />
+    <Property Name="positionID" Type="Int32" />
+    <Property Name="staffAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ifWarrant" Type="Boolean" />
+  </EntityType>
+  <EntityContainer Name="DrinksSystemEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="B_Handover" EntityType="Self.B_Handover" />
+    <EntitySet Name="B_MemberRechargeRecord" EntityType="Self.B_MemberRechargeRecord" />
+    <EntitySet Name="B_SalesRecord" EntityType="Self.B_SalesRecord" />
+    <EntitySet Name="B_SalesRecordDetails" EntityType="Self.B_SalesRecordDetails" />
+    <EntitySet Name="S_Dictionary" EntityType="Self.S_Dictionary" />
+    <EntitySet Name="S_Member" EntityType="Self.S_Member" />
+    <EntitySet Name="S_Product" EntityType="Self.S_Product" />
+    <EntitySet Name="S_Staff" EntityType="Self.S_Staff" />
+  </EntityContainer>
+</Schema>

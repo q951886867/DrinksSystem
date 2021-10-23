@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DrinksSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="B_Handover">
+    <Key>
+      <PropertyRef Name="handoverID" />
+    </Key>
+    <Property Name="handoverID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="staffID" Type="int" />
+    <Property Name="startTime" Type="datetime" />
+    <Property Name="endTime" Type="datetime" />
+    <Property Name="cashIncome" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="wechatIncome" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="amountHanded" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="reserveFund" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="businessAmount" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="B_MemberRechargeRecord">
+    <Key>
+      <PropertyRef Name="memberRechargeID" />
+    </Key>
+    <Property Name="memberRechargeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="memberID" Type="int" />
+    <Property Name="staffID" Type="int" />
+    <Property Name="rechargeAmount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="promotionalAmount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="promotionalIntegral" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="totalAmount" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="B_SalesRecord">
+    <Key>
+      <PropertyRef Name="salesRecordID" />
+    </Key>
+    <Property Name="salesRecordID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="salesNumber" Type="nvarchar(max)" />
+    <Property Name="salesTime" Type="datetime" />
+    <Property Name="staffID" Type="int" />
+    <Property Name="ifTakeout" Type="bit" />
+    <Property Name="cashPay" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="wechatPay" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="ifMember" Type="bit" />
+    <Property Name="memberID" Type="int" />
+    <Property Name="orderStatus" Type="bit" />
+    <Property Name="ifRedeem" Type="bit" />
+    <Property Name="salesAmount" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="B_SalesRecordDetails">
+    <Key>
+      <PropertyRef Name="salesDetailsID" />
+    </Key>
+    <Property Name="salesDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="salesRecordID" Type="int" />
+    <Property Name="productID" Type="int" />
+    <Property Name="taste" Type="nvarchar(max)" />
+    <Property Name="quantity" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="price" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="ifDamaged" Type="bit" />
+    <Property Name="completedState" Type="bit" />
+  </EntityType>
+  <EntityType Name="S_Dictionary">
+    <Key>
+      <PropertyRef Name="dictionaryID" />
+    </Key>
+    <Property Name="dictionaryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dictionaryType" Type="nvarchar(max)" />
+    <Property Name="dictionaryName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="S_Member">
+    <Key>
+      <PropertyRef Name="memberID" />
+    </Key>
+    <Property Name="memberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="memberNumber" Type="nvarchar(max)" />
+    <Property Name="memberName" Type="nvarchar(max)" />
+    <Property Name="memberBalance" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="memberPoints" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="S_Product">
+    <Key>
+      <PropertyRef Name="productID" />
+    </Key>
+    <Property Name="productID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="productName" Type="nvarchar(max)" />
+    <Property Name="productNumber" Type="nvarchar(max)" />
+    <Property Name="productTypeID" Type="int" />
+    <Property Name="cupTypeID" Type="int" />
+    <Property Name="productPrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="productCost" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="memberPrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="productIntegral" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="productImage" Type="image" />
+  </EntityType>
+  <EntityType Name="S_Staff">
+    <Key>
+      <PropertyRef Name="staffID" />
+    </Key>
+    <Property Name="staffID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="staffNumber" Type="nvarchar(max)" />
+    <Property Name="staffPassword" Type="nvarchar(max)" />
+    <Property Name="staffName" Type="nvarchar(max)" />
+    <Property Name="staffPhone" Type="nvarchar(max)" />
+    <Property Name="sexID" Type="int" />
+    <Property Name="positionID" Type="int" />
+    <Property Name="staffAddress" Type="nvarchar(max)" />
+    <Property Name="ifWarrant" Type="bit" />
+  </EntityType>
+  <EntityContainer Name="DrinksSystemModelStoreContainer">
+    <EntitySet Name="B_Handover" EntityType="Self.B_Handover" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="B_MemberRechargeRecord" EntityType="Self.B_MemberRechargeRecord" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="B_SalesRecord" EntityType="Self.B_SalesRecord" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="B_SalesRecordDetails" EntityType="Self.B_SalesRecordDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="S_Dictionary" EntityType="Self.S_Dictionary" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="S_Member" EntityType="Self.S_Member" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="S_Product" EntityType="Self.S_Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="S_Staff" EntityType="Self.S_Staff" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,126 @@
+﻿<Window x:Class="DrinksSystem.Views.HandoverView.addOrUpdateHandover"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        x:Name="window"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen" 
+        ResizeMode="NoResize"
+        WindowState="Maximized" 
+        AllowsTransparency="True"
+        Background="#AA3E3E3E"
+        Title="addOrUpadteProduc" Height="1080" Width="1920">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.Resources>
+        <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+    </Window.Resources>
+    <Border x:Name="border1" Width="800" Height="500" Background="#fbfbfd"  CornerRadius="3">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.1*"/>
+                <RowDefinition Height="6.5*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <TextBlock Text="{Binding WindowTitle}" FontSize="16" VerticalAlignment="Center"  Foreground="#2c68ff"
+                           Margin="20 0 0 0"/>
+                <Border BorderThickness="0 0 0 1" BorderBrush="#dfe4ea" Margin="20 0 20 0"></Border>
+                <Button Style="{StaticResource MaterialDesignRaisedLightButton}" ToolTip="CloseWindow"
+                        Width="50" HorizontalAlignment="Right" Foreground="#1d1d1f " Margin="0 0 0 0" Background="{x:Null}" BorderBrush="{x:Null}"
+                        Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=window}">
+                    <materialDesign:PackIcon Kind="WindowClose" >
+                    </materialDesign:PackIcon>
+                </Button>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" ItemHeight="70" ItemWidth="320" Grid.Column="1">
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock Text="开始时间：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
+                        <DatePicker x:Name="FutureDatePicker1" Width="110" Margin="15 0 0 0" 
+                                    materialDesign:HintAssist.Hint="起始日期" materialDesign:CalendarAssist.IsHeaderVisible="False"
+                                    SelectedDate="{Binding StartDate}" DisplayDateEnd="{Binding SelectedDate,ElementName=FutureDatePicker2}"/>
+                        <materialDesign:TimePicker x:Name="PresetTimePicker1" materialDesign:HintAssist.Hint="起始时间"  
+                                                   Is24Hours="True" Width="85" Margin="5 0 0 0" 
+                                                   SelectedTime="{Binding StartTime}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Text="结束时间：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
+                        <DatePicker x:Name="FutureDatePicker2" Width="110" Margin="15 0 0 0" 
+                                    materialDesign:HintAssist.Hint="结束日期" materialDesign:CalendarAssist.IsHeaderVisible="False"
+                                    SelectedDate="{Binding EndDate}" DisplayDateStart="{Binding SelectedDate,ElementName=FutureDatePicker1}"/>
+                        <materialDesign:TimePicker x:Name="PresetTimePicker2"  materialDesign:HintAssist.Hint="结束时间" 
+                                                   Is24Hours="True" Width="85" Margin="5 0 0 0" 
+                                                   SelectedTime="{Binding EndTime}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock Text="该班员工：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
+                        <ComboBox Width="200" materialDesign:HintAssist.Hint="OS" Margin="15 0 0 0" 
+                                  Padding="5 0 0 0 "
+                                  materialDesign:HintAssist.HintOpacity=".26" Height="35" 
+                                  ItemsSource="{Binding StaffComboBox}" SelectedValue="{Binding HandoverData.staffID}"
+                                  DisplayMemberPath="staffName" SelectedValuePath="staffID">
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Text="现金收入：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
+                        <TextBox  Text="{Binding HandoverData.cashIncome,Mode=TwoWay}" Height="35" Width="200" pu:TextBoxHelper.Watermark="请输入" pu:TextBoxHelper.FocusedBorderBrush="#B5B5B5" 
+                                  pu:TextBoxHelper.FocusedShadowColor="#B5B5B5" pu:TextBoxHelper.CornerRadius="3" 
+                                  pu:TextBoxHelper.IsClearButtonVisible="True"  Margin="15 0 0 0" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:InvokeCommandAction Command="{Binding TextChangeCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock Text="微信收入：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
+                        <TextBox  Text="{Binding HandoverData.wechatIncome,Mode=TwoWay}" Height="35" Width="200" pu:TextBoxHelper.Watermark="请输入" pu:TextBoxHelper.FocusedBorderBrush="#B5B5B5" 
+                                  pu:TextBoxHelper.FocusedShadowColor="#B5B5B5" pu:TextBoxHelper.CornerRadius="3" 
+                                  pu:TextBoxHelper.IsClearButtonVisible="True"  Margin="15 0 0 0">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:InvokeCommandAction Command="{Binding TextChangeCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Text="上交金额：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
+                        <TextBox  Text="{Binding HandoverData.amountHanded,Mode=TwoWay}" Height="35" Width="200" pu:TextBoxHelper.Watermark="请输入" pu:TextBoxHelper.FocusedBorderBrush="#B5B5B5" 
+                                  pu:TextBoxHelper.FocusedShadowColor="#B5B5B5" pu:TextBoxHelper.CornerRadius="3" 
+                                  pu:TextBoxHelper.IsClearButtonVisible="True"  Margin="15 0 0 0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="320">
+                        <TextBlock Text="下放金额：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
+                        <TextBox  Text="{Binding HandoverData.reserveFund,Mode=TwoWay}" Height="35" Width="200" pu:TextBoxHelper.Watermark="请输入" pu:TextBoxHelper.FocusedBorderBrush="#B5B5B5" 
+                                  pu:TextBoxHelper.FocusedShadowColor="#B5B5B5" pu:TextBoxHelper.CornerRadius="3" 
+                                  pu:TextBoxHelper.IsClearButtonVisible="True"  Margin="15 0 0 0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Text="营业总额：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
+                        <TextBox  Text="{Binding HandoverData.businessAmount,Mode=TwoWay}" Height="35" Width="200" pu:TextBoxHelper.Watermark="自动计算" pu:TextBoxHelper.FocusedBorderBrush="#B5B5B5" 
+                                  pu:TextBoxHelper.FocusedShadowColor="#B5B5B5" pu:TextBoxHelper.CornerRadius="3" 
+                                  pu:TextBoxHelper.IsClearButtonVisible="True"  Margin="15 0 0 0" IsEnabled="False"/>
+                    </StackPanel>
+                </WrapPanel>
+
+            </Grid>
+            <Border Grid.Row="1" BorderThickness="0 0 0 1" Height="1" VerticalAlignment="Bottom" BorderBrush="#dfe4ea" Margin="20 0 20 0"></Border>
+
+            <Grid Grid.Row="3">
+                <Button Margin="10 0 5 0" Width="150" Height="35" Style="{StaticResource MaterialDesignFlatLightBgButton}" ToolTip="新增产品" Background="#2c68ff" BorderBrush="#2c68ff"
+                            Foreground="#f5f5f7"
+                            Content="提交" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=window}"/>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

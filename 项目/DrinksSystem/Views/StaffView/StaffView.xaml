@@ -1,0 +1,133 @@
+﻿<UserControl x:Class="DrinksSystem.Views.StaffView.StaffView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:page="clr-namespace:DrinksSystem.Resources.control" 
+             xmlns:controls="clr-namespace:DrinksSystem.Resources.PublicClass"
+             Width="1570" Height="927" Background="#fbfbfd">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <ResourceDictionary>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
+        <!--按钮 搜索框-->
+        <Border Grid.Row="0" BorderThickness="0 0 0 1" BorderBrush="#dfe4ea">
+            <Grid>
+                <!--按钮-->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 50 0">
+                    <Button Margin="10 0 5 0" Width="100" Height="35" Style="{StaticResource MaterialDesignFlatLightBgButton}" ToolTip="新增产品" Background="#50E997 " BorderBrush="#50E997"
+                            Foreground="#f5f5f7"
+                            Content="新增" Command="{Binding staffInsertCommand}" />
+                </StackPanel>
+            </Grid>
+        </Border>
+        <!--DataGrid表格-->
+        <DataGrid Grid.Row="1" Margin="10"  ItemsSource="{Binding StaffData}" SelectedItem="{Binding StaffDataSelect, Mode=TwoWay}" 
+                  CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="Column" 
+                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" Background="#fbfbfd"
+                  x:Name="yinDatagrid" controls:DataGridBehavior.RowNumbers="True" RowHeight="60">
+            <DataGrid.Columns >
+                <DataGridTemplateColumn Width="80"
+                                        Header="序号"
+                                        IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}, Path=Header}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="员工名称" Width="2*" x:Name="jajaj">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock   HorizontalAlignment="Center" Foreground="#1d1d1f" VerticalAlignment="Center" Text="{Binding staffName}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="职位" Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" Foreground="#1d1d1f" VerticalAlignment="Center" Text="{Binding positionName}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="员工账号" Width="1.5*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" Foreground="#1d1d1f" VerticalAlignment="Center" Text="{Binding staffNumber}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="员工密码" Width="1.5*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" Foreground="#1d1d1f" VerticalAlignment="Center" Text="{Binding staffPassword}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="电话号码" Width="1.5*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" Foreground="#1d1d1f" VerticalAlignment="Center" Text="{Binding staffPhone}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="性别" Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" Foreground="#1d1d1f" VerticalAlignment="Center" Text="{Binding sexName}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="地址" Width="2*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" Foreground="#1d1d1f" VerticalAlignment="Center" Text="{Binding staffAddress}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="是否授权后台" Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding ifWarrant}" IsEnabled="False"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="操作" Width="3*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Margin="10 0 5 0" Width="100" Height="35" Style="{StaticResource MaterialDesignFlatLightBgButton}"  Background="#f4d142" BorderBrush="#f4d142"
+                            Foreground="#f5f5f7"
+                            Content="修改" Command="{Binding DataContext.staffUpdateCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}"/>
+                                <Button Margin="10 0 5 0" Width="100" Height="35" Style="{StaticResource MaterialDesignFlatLightBgButton}"  Background="#ff4d4f" BorderBrush="#ff4d4f"
+                            Foreground="#f5f5f7"
+                            Content="删除" Command="{Binding DataContext.staffDeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--分页控件-->
+        <Grid Grid.Row="2">
+            <page:Pager x:Name="nextPageControl1" Margin="0 0 150 0"   HorizontalAlignment="Center" TotalPage="{Binding Path=TotalPage,Mode=TwoWay}" PageSize="{Binding Path=PageSize,Mode=TwoWay}" CurrentPage="{Binding Path=CurrentPage,Mode=TwoWay}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger  EventName="PageChanged">
+                        <i:InvokeCommandAction  Command="{Binding Path=NextPageSearchCommand, Mode=TwoWay}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </page:Pager>
+        </Grid>
+    </Grid>
+</UserControl>

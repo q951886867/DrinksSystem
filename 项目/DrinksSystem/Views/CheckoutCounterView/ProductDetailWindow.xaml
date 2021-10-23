@@ -1,0 +1,94 @@
+﻿<Window x:Class="DrinksSystem.Views.CheckoutCounterView.ProductDetailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:controls="clr-namespace:DrinksSystem.Resources.PublicClass"
+        xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+        x:Name="window"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="#003E3E3E"
+        WindowStartupLocation="CenterScreen"
+        >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="MouseLeftButtonDown">
+            <i:InvokeCommandAction Command="{Binding DragMoveCommand}" CommandParameter="{Binding ElementName=window}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.Resources>
+        <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+    </Window.Resources>
+    <Grid Width="420" Height="550">
+        <Border Width="420" Height="550" Background="#fbfbfd" CornerRadius="10" BorderThickness="1" BorderBrush="#dfe4ea">
+            <!--窗口阴影-->
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Direction="-100" RenderingBias="Quality" ShadowDepth="1" Color="#FFe6e8ec" Opacity="1"/>
+            </Border.Effect>
+        </Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.3*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid Cursor="Hand">
+                <TextBlock Text="选择口味" FontSize="14" VerticalAlignment="Center"  Foreground="#2c68ff"
+                               Margin="20 0 0 0"/>
+                <Border BorderThickness="0 0 0 1" BorderBrush="#dfe4ea" Margin="20 0 20 0"></Border>
+                <Button Style="{StaticResource MaterialDesignRaisedLightButton}" ToolTip="CloseWindow"
+                            Width="50" HorizontalAlignment="Right" Foreground="#1d1d1f " Margin="0 0 0 0" Background="{x:Null}" BorderBrush="{x:Null}"
+                            Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=window}">
+                    <materialDesign:PackIcon Kind="WindowClose" >
+                    </materialDesign:PackIcon>
+                </Button>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Border Width="140" Height="145" BorderThickness="1" BorderBrush="#dfe4ea">
+                    <Image Width="140" Height="145" Source="{Binding ProductImage}"  Stretch="Fill">
+                    </Image>
+                </Border>
+            </Grid>
+            <StackPanel Grid.Row="2">
+                <StackPanel  Orientation="Horizontal" Margin="0 10 0 0 ">
+                    <TextBlock Text="温度：" FontSize="14" VerticalAlignment="Center"  Foreground="#1d1d1f"
+                               Margin="20 0 0 0"/>
+                    <RadioButton x:Name="temperature1" Command="{Binding TemperatureClick}" CommandParameter="{Binding ElementName=temperature1}" Margin="0 0 10 0" Cursor="Hand" Width="70" Height="30" Content="冰" pu:RadioButtonHelper.RadioButtonStyle="Button" pu:RadioButtonHelper.CheckedBackground="#2c68ff" />
+                    <RadioButton x:Name="temperature2" Command="{Binding TemperatureClick}" CommandParameter="{Binding ElementName=temperature2}" Margin="0 0 10 0" Cursor="Hand" Width="70" Height="30" Content="少冰" pu:RadioButtonHelper.RadioButtonStyle="Button" pu:RadioButtonHelper.CheckedBackground="#2c68ff" />
+                    <RadioButton x:Name="temperature3" Command="{Binding TemperatureClick}" CommandParameter="{Binding ElementName=temperature3}" Margin="0 0 10 0" Cursor="Hand" Width="70" Height="30" Content="常温" pu:RadioButtonHelper.RadioButtonStyle="Button" pu:RadioButtonHelper.CheckedBackground="#2c68ff" />
+                    <RadioButton x:Name="temperature4" Command="{Binding TemperatureClick}" CommandParameter="{Binding ElementName=temperature4}" Margin="0 0 10 0" Cursor="Hand" Width="70" Height="30" Content="热" pu:RadioButtonHelper.RadioButtonStyle="Button" pu:RadioButtonHelper.CheckedBackground="#2c68ff" />
+                </StackPanel>
+
+                <StackPanel  Orientation="Horizontal" Margin="0 35 0 0 ">
+                    <TextBlock Text="甜度：" FontSize="14" VerticalAlignment="Center"  Foreground="#1d1d1f"
+                               Margin="20 0 0 0"/>
+                    <RadioButton x:Name="Sweetness1"  Command="{Binding SweetnessClick}" CommandParameter="{Binding ElementName=Sweetness1}" Margin="0 0 10 0" Cursor="Hand" Width="70" Height="30" Content="全糖" pu:RadioButtonHelper.RadioButtonStyle="Button" pu:RadioButtonHelper.CheckedBackground="#2c68ff" />
+                    <RadioButton x:Name="Sweetness2"  Command="{Binding SweetnessClick}" CommandParameter="{Binding ElementName=Sweetness2}" Margin="0 0 10 0" Cursor="Hand" Width="70" Height="30" Content="7分糖" pu:RadioButtonHelper.RadioButtonStyle="Button" pu:RadioButtonHelper.CheckedBackground="#2c68ff" />
+                    <RadioButton x:Name="Sweetness3"  Command="{Binding SweetnessClick}" CommandParameter="{Binding ElementName=Sweetness3}" Margin="0 0 10 0" Cursor="Hand" Width="70" Height="30" Content="5分糖" pu:RadioButtonHelper.RadioButtonStyle="Button" pu:RadioButtonHelper.CheckedBackground="#2c68ff" />
+                    <RadioButton x:Name="Sweetness4"  Command="{Binding SweetnessClick}" CommandParameter="{Binding ElementName=Sweetness4}" Margin="0 0 10 0" Cursor="Hand" Width="70" Height="30" Content="3分糖" pu:RadioButtonHelper.RadioButtonStyle="Button" pu:RadioButtonHelper.CheckedBackground="#2c68ff" />
+                </StackPanel>
+
+
+                <StackPanel Orientation="Horizontal" Margin="0 35 0 0 ">
+                    <TextBlock Text="数量：" FontSize="14" VerticalAlignment="Center"  Foreground="#1d1d1f"
+                               Margin="20 0 0 0"/>
+                    <Button Margin="10 0 0 0"  Height="30" Width="30" Content="-" pu:ButtonHelper.WaitingContent="{x:Null}" pu:ButtonHelper.ClickStyle="Sink" 
+                             Background="#fbfbfd" pu:ButtonHelper.HoverBrush="{x:Null}" Foreground="#a4b0be" Cursor="Hand"
+                              FontSize="16" FontWeight="Bold" Command="{Binding ReduceQuantityCommand}"/>
+                    <TextBox Width="40" Height="30" TextAlignment="Center" Padding="0" Foreground="#1d1d1f" Text="{Binding Quantity,Mode=TwoWay}"></TextBox>
+                    <Button  Height="30" Width="30" Content="+" pu:ButtonHelper.WaitingContent="{x:Null}" pu:ButtonHelper.ClickStyle="Sink" 
+                             Background="#fbfbfd" pu:ButtonHelper.HoverBrush="{x:Null}" Foreground="#a4b0be" Cursor="Hand"
+                             FontSize="14" FontWeight="Bold" Command="{Binding PlusQuantityCommand}"/>
+                </StackPanel>
+            </StackPanel>
+            <Grid Grid.Row="3">
+                <Button Width="100" Height="35" Background="#2c68ff" Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                        Content="添加" Foreground="#f5f5f7" Command="{ Binding AddProductCommand}" CommandParameter="{Binding ElementName=window}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
