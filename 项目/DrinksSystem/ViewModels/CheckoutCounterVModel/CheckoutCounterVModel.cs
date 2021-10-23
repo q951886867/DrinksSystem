@@ -260,7 +260,7 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
                 myModel.Entry(mySalesRecord).State = EntityState.Modified;
                 if (myModel.SaveChanges()>0)
                 {
-                    SelectWaitingAreaData();//刷新表格
+                    SelectWaitingAreaData();
                     NoticeText = "请单号" + mySalesRecord.salesNumber + "到前台取餐~";//修改公告
                 }
                 else
