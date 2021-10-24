@@ -88,7 +88,6 @@ namespace DrinksSystem.ViewModels
         /// </summary>
         private void load(Window window)
         {
-            UserName = "1662001";
             wd = window;
         }
         /// <summary>
@@ -99,6 +98,7 @@ namespace DrinksSystem.ViewModels
             if (window!=null)
             {
                 window.Close();
+                System.Environment.Exit(0);
             }
         }
         /// <summary>

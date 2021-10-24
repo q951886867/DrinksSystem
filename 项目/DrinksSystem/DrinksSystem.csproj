@@ -146,6 +146,7 @@
     <Compile Include="Resources\control\UCTabItem.xaml.cs">
       <DependentUpon>UCTabItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\PublicClass\BindingProxy.cs" />
     <Compile Include="Resources\PublicClass\ByteConvertBitmapImage.cs" />
     <Compile Include="Resources\PublicClass\ConvertImageAndByte.cs" />
     <Compile Include="Resources\PublicClass\DataGridBehavior.cs" />

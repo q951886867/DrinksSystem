@@ -250,7 +250,6 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
         //等待区 右键制作完成
         private void FnishClick()
         {
-            liusadawas
             if (WaitingAreaEntity!=null)
             {
                 //根据当前选中行ID 修改订单状态

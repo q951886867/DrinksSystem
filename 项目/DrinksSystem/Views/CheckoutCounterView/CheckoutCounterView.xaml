@@ -8,12 +8,16 @@
         WindowStyle="None"
         WindowState="Maximized"
         Height="1080" Width="1920" Background="#f3f5f8">
+    
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=WP_Simers}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
+        <Grid.Resources>
+            <controls:BindingProxy x:Key="Proxy" Data="{Binding}" />
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="18*"/>
@@ -101,11 +105,12 @@
                                 <DataGridTemplateColumn Header="当前状态" Width="1*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding orderStatus1}">
+                                            <TextBlock HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding orderStatus1}" >
                                                 <!--右键菜单-->
-                                                <TextBlock.ContextMenu>
-                                                    <ContextMenu  Width="150">
-                                                        <MenuItem Header="完成" Height="30" FontSize="14" Margin="5 0 5 0" Command="{Binding DataContext.FnishClickCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}"/>
+                                                <TextBlock.ContextMenu >
+                                                    <ContextMenu  Width="150" >
+                                                        <!--ContextMenu 它不在可视化树中，因此必须告诉 Context Menu 使用哪个数据上下文。-->
+                                                        <MenuItem  Header="完成" Height="30" FontSize="14" Margin="5 0 5 0" Command="{Binding Source={StaticResource Proxy}, Path=Data.FnishClickCommand}"/>
                                                     </ContextMenu>
                                                 </TextBlock.ContextMenu>
                                                 <TextBlock.Style>
@@ -167,7 +172,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="数量" Width="1*">
+                                <DataGridTemplateColumn Header="数量" Width="1.5*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
@@ -296,12 +301,16 @@
                         <!--<Border BorderThickness="0 0 0 1" BorderBrush="#dfe4ea" Margin="10 0 10 0"/>-->
                         <TextBox Grid.Row="1" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="10 0 10 0" 
                              BorderBrush="#dfe4ea" AcceptsReturn="True" TextWrapping="Wrap"
-                             TextAlignment="Left" Text="{Binding NoticeText}" FontSize="16"  Foreground="#8d8f8f">
+                             TextAlignment="Left" Text="{Binding NoticeText}" FontSize="14"  Foreground="#8d8f8f">
                         </TextBox>
                     </Grid>
                     <!--操作区-->
                     <Grid Grid.Row="3">
-                        <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="10 0 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5.1*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="5 0 0 0">
                             <Button Margin="5 0 5 0" Width="120" Height="40" Style="{StaticResource MaterialDesignFlatLightBgButton}" ToolTip="新增产品" BorderBrush="#50E997"
                                 Foreground="#f5f5f7" VerticalAlignment="Bottom"
                                 Content="结账" Command="{Binding PayCommand}" Background="#FF50E997" >
@@ -313,34 +322,34 @@
                                 Foreground="#f5f5f7" VerticalAlignment="Bottom"
                                 Content="会员充值" Command="{Binding MinImizeCommand}" />
                             
-                            <Grid Width="550">
-                                <materialDesign:PopupBox  PlacementMode="BottomAndAlignCentres" ToolTipService.Placement="Top" 
-                                                      ToolTip="系统操作"  HorizontalAlignment="Right" Margin="20 0 0 0"
-                                                      Width="130" VerticalAlignment="Bottom"  BorderThickness="0" >
-                                    <StackPanel>
-                                        <Button  >
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="LockOutline" />
-                                                <TextBlock Text=" 锁定" FontSize="14"/>
-                                            </StackPanel>
-                                        </Button>
-                                        <Button  >
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="AccountSwitch" />
-                                                <TextBlock Text=" 交班" FontSize="14"/>
-                                            </StackPanel>
-                                        </Button>
-                                        <Button  >
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="ExitToApp" />
-                                                <TextBlock Text=" 退出" FontSize="14"/>
-                                            </StackPanel>
-                                        </Button>
-                                    </StackPanel>
-                                </materialDesign:PopupBox>
-                            </Grid>
+                            
                         </StackPanel>
-
+                        <Grid Grid.Column="1">
+                            <materialDesign:PopupBox  PlacementMode="BottomAndAlignCentres" ToolTipService.Placement="Top" 
+                                                      ToolTip="系统操作"  HorizontalAlignment="Right" Margin="20 0 0 0"
+                                                      Width="130" VerticalAlignment="Center"  BorderThickness="0" >
+                                <StackPanel>
+                                    <Button  >
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="LockOutline" />
+                                            <TextBlock Text=" 锁定" FontSize="14"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button  >
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="AccountSwitch" />
+                                            <TextBlock Text=" 交班" FontSize="14"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button  >
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="ExitToApp" />
+                                            <TextBlock Text=" 退出" FontSize="14"/>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </materialDesign:PopupBox>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Border>
