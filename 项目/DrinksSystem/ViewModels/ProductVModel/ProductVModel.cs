@@ -143,7 +143,16 @@ namespace DrinksSystem.ViewModels.ProductVModel
             var list = (from tb in myModel.S_Product
                         orderby tb.productNumber descending
                         select tb).ToList();
-            string Number = list[0].productNumber.Remove(0, 1);//去除编号第一个字母A
+            string Number = "";
+            if (list.Count()>0)
+            {
+                Number = list[0].productNumber.Remove(0, 1);//去除编号第一个字母A
+
+            }
+            else
+            {
+                Number =  1000.ToString();
+            }
             string Number1 = "A" + (Convert.ToDecimal(Number) + 1).ToString();//编号加1 产品编号格式 A1001
             var ifProduct = myModel.S_Product.Where(m => m.productNumber.Trim() == Number1).ToList().Count;//判断计算的编号是否与数据库重复
             if (ifProduct > 0)//如果重复

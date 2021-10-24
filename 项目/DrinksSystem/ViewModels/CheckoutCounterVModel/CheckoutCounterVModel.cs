@@ -365,8 +365,12 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
                 //销售记录ID
                 var salesRecordID = list1[i].salesRecordID;
                 //订单产品总数量
-                var salesQuantity1 = (from tb in myModel.B_SalesRecordDetails where tb.salesRecordID == salesRecordID select tb).ToList().Count();
-                mySalesRecord.salesQuantity = salesQuantity1.ToString();
+                
+                var salesQuantity1 = (from tb in myModel.B_SalesRecordDetails where tb.salesRecordID == salesRecordID select tb).ToList();
+                for (int a = 0; a < salesQuantity1.Count(); a++)
+                {
+                    mySalesRecord.salesQuantity += salesQuantity1[a].quantity;
+                }
                 WaitingAreaData.Add(mySalesRecord);
             }
         }
