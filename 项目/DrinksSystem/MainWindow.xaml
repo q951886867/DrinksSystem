@@ -3,12 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:controls="clr-namespace:DrinksSystem.Resources.PublicClass"
         x:Name="MainWin"
         WindowStyle="None"
         WindowState="Maximized"
         Background="#f3f5f8"
         Title="MainWindow" Height="1080" Width="1920">
     <Grid>
+        <Grid.Resources>
+            <controls:BindingProxy x:Key="Proxy" Data="{Binding}" />
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="10*"/>
@@ -25,9 +29,10 @@
             </Border>
             <!--树形-->
             <Border Grid.Row="1" BorderThickness="0 0 1 0" BorderBrush="#dfe4ea">
-                <TreeView MinWidth="220" >
+                <TreeView  >
+                    <!--MinWidth="200"-->
                     <!--主页-->
-                    <TreeViewItem  FontSize="14" Margin="0 15 0 0">
+                    <TreeViewItem  FontSize="14" Margin="0 15 0 0" >
                         <TreeViewItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Foreground="#1d1d1f" Text="&#xe607;"   FontFamily="Resources/icon/#iconfont" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 10 3"/>
@@ -43,14 +48,19 @@
                                 <TextBlock Margin="8 0 0 0" Text="系统设置" />
                             </StackPanel>
                         </TreeViewItem.Header>
-                        <TreeViewItem>
+                        <TreeViewItem >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <i:InvokeCommandAction Command="{Binding Source={StaticResource Proxy}, Path=Data.ProducPageCommand}" CommandParameter="{Binding ElementName=tab_Main}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <TreeViewItem.Header>
-                                <StackPanel Orientation="Horizontal" Width="250">
-                                    <i:Interaction.Triggers>
+                                <StackPanel Orientation="Horizontal" >
+                                    <!--<i:Interaction.Triggers>
                                         <i:EventTrigger EventName="MouseDown">
                                             <i:InvokeCommandAction Command="{Binding ProducPageCommand}" CommandParameter="{Binding ElementName=tab_Main}"/>
                                         </i:EventTrigger>
-                                    </i:Interaction.Triggers>
+                                    </i:Interaction.Triggers>-->
                                     <materialDesign:PackIcon Kind="PackageVariantClosed" FontSize="14"/>
                                     <TextBlock Margin="8 0 0 0" Text="产品管理" FontSize="14"/>
                                 </StackPanel>
@@ -58,7 +68,7 @@
                         </TreeViewItem>
                         <TreeViewItem >
                             <TreeViewItem.Header>
-                                <StackPanel Orientation="Horizontal" Width="250">
+                                <StackPanel Orientation="Horizontal" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="MouseDown">
                                             <i:InvokeCommandAction Command="{Binding DictionaryCommand}" CommandParameter="{Binding ElementName=tab_Main}"/>
@@ -71,7 +81,7 @@
                         </TreeViewItem>
                         <TreeViewItem >
                             <TreeViewItem.Header>
-                                <StackPanel Orientation="Horizontal" Width="250">
+                                <StackPanel Orientation="Horizontal" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="MouseDown">
                                             <i:InvokeCommandAction Command="{Binding StaffPageCommand}" CommandParameter="{Binding ElementName=tab_Main}"/>
@@ -84,7 +94,7 @@
                         </TreeViewItem>
                         <TreeViewItem>
                             <TreeViewItem.Header>
-                                <StackPanel Orientation="Horizontal" Width="250">
+                                <StackPanel Orientation="Horizontal" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="MouseDown">
                                             <i:InvokeCommandAction Command="{Binding HandoverPageCommand}" CommandParameter="{Binding ElementName=tab_Main}"/>

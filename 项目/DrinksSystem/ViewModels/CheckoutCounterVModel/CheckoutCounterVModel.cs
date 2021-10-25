@@ -31,6 +31,7 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
             PayCommand = new RelayCommand(Pay);//结账窗口
             DeleteClickCommand = new RelayCommand(DeleteClick);//销售区删除当前选中行
             FnishClickCommand = new RelayCommand(FnishClick);//制作完成点击
+            MemberHandlingCommand = new RelayCommand(MemberHandling);//会员办理
 
         }
         #region 属性
@@ -244,9 +245,15 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
         public RelayCommand PayCommand { get; set; }//结账窗口
         public RelayCommand DeleteClickCommand { get; set; }//销售区 删除当前选中行
         public RelayCommand FnishClickCommand { get; set; }//制作完成点击
+        public RelayCommand MemberHandlingCommand { get; set; }//会员办理
         #endregion
 
         #region 函数
+        //会员办理
+        private void MemberHandling()
+        { 
+             
+        }
         //等待区 右键制作完成
         private void FnishClick()
         {
