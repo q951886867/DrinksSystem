@@ -32,6 +32,7 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
             DeleteClickCommand = new RelayCommand(DeleteClick);//销售区删除当前选中行
             FnishClickCommand = new RelayCommand(FnishClick);//制作完成点击
             MemberHandlingCommand = new RelayCommand(MemberHandling);//会员办理
+            EnterBackgroundCommand = new RelayCommand<Window>(EnterBackground);//进入后台
 
         }
         #region 属性
@@ -246,9 +247,27 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
         public RelayCommand DeleteClickCommand { get; set; }//销售区 删除当前选中行
         public RelayCommand FnishClickCommand { get; set; }//制作完成点击
         public RelayCommand MemberHandlingCommand { get; set; }//会员办理
+        public RelayCommand<Window> EnterBackgroundCommand { get; set; }//进入后台
         #endregion
 
         #region 函数
+        //进入后台
+        private void EnterBackground(Window window)
+        {
+            //判断权限
+            if (Convert.ToBoolean(StaffNow.ifWarrant))
+            {
+                MainWindow myWindow = new MainWindow();
+                var myVModel=(myWindow.DataContext as MainWindowViewModel);
+                myVModel.StaffIDNow = StaffNow.staffID;//传递当前员工ID
+                window.Close();
+                myWindow.Show();
+            }
+            else
+            {
+                Notice.Show("当前用户权限不足", "提示", 2, MessageBoxIcon.Error);
+            }
+        }
         //会员办理
         private void MemberHandling()
         { 
@@ -263,7 +282,7 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
                 var salesRecordID = WaitingAreaEntity.salesRecordID;
                 B_SalesRecord mySalesRecord = new B_SalesRecord();
                 mySalesRecord = (from tb in myModel.B_SalesRecord where tb.salesRecordID == salesRecordID select tb).Single();
-                mySalesRecord.orderStatus = true;//修改为制作完成 12
+                mySalesRecord.orderStatus = true;//修改为制作完成
                 myModel.Entry(mySalesRecord).State = EntityState.Modified;
                 if (myModel.SaveChanges()>0)
                 {

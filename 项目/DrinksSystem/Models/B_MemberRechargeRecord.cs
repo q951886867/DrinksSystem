@@ -21,5 +21,6 @@ namespace DrinksSystem.Models
         public Nullable<decimal> promotionalAmount { get; set; }
         public Nullable<decimal> promotionalIntegral { get; set; }
         public Nullable<decimal> totalAmount { get; set; }
+        public string remark { get; set; }
     }
 }

@@ -130,6 +130,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vos\HandoverVo.cs" />
+    <Compile Include="Models\Vos\MemberRechargeRecordVo.cs" />
     <Compile Include="Models\Vos\ProductDetailVo.cs" />
     <Compile Include="Models\Vos\ProductVo.cs" />
     <Compile Include="Models\Vos\SalesRecordVo.cs" />
@@ -161,6 +162,10 @@
     <Compile Include="ViewModels\HandoverVModel\HandoverVModel.cs" />
     <Compile Include="ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MemberVModel\MemberInformationVModel.cs" />
+    <Compile Include="ViewModels\MemberVModel\MemberRechargeRecordVModel.cs" />
+    <Compile Include="ViewModels\MemberVModel\MemberRechargeVModel.cs" />
+    <Compile Include="ViewModels\MemberVModel\MemberVModel.cs" />
     <Compile Include="ViewModels\ProductVModel\addOrUpadteProducVModel.cs" />
     <Compile Include="ViewModels\ProductVModel\ProductVModel.cs" />
     <Compile Include="ViewModels\StaffVModel\addOrUpdateStaffVModel.cs" />
@@ -188,6 +193,18 @@
     </Compile>
     <Compile Include="Views\HandoverView\HandoverView.xaml.cs">
       <DependentUpon>HandoverView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MemberView\MemberInformation.xaml.cs">
+      <DependentUpon>MemberInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MemberView\MemberRechargeRecord.xaml.cs">
+      <DependentUpon>MemberRechargeRecord.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MemberView\MemberRechargeView.xaml.cs">
+      <DependentUpon>MemberRechargeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MemberView\MemberView.xaml.cs">
+      <DependentUpon>MemberView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Product\addOrUpadteProduc.xaml.cs">
       <DependentUpon>addOrUpadteProduc.xaml</DependentUpon>
@@ -269,6 +286,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HandoverView\HandoverView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MemberView\MemberInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MemberView\MemberRechargeRecord.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MemberView\MemberRechargeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MemberView\MemberView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

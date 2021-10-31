@@ -3,6 +3,7 @@ using DrinksSystem.Resources.control;
 using DrinksSystem.Views.CheckoutCounterView;
 using DrinksSystem.Views.DictionaryView;
 using DrinksSystem.Views.HandoverView;
+using DrinksSystem.Views.MemberView;
 using DrinksSystem.Views.Product;
 using DrinksSystem.Views.StaffView;
 using GalaSoft.MvvmLight;
@@ -35,12 +36,35 @@ namespace DrinksSystem.ViewModels
             HandoverPageCommand = new RelayCommand<TabControl>(HandoverPage);
             //进入收银台
             CheckoutCounterCommand = new RelayCommand<Window>(CheckoutCounter);
+            //会员管理
+            MemberPageCommand = new RelayCommand<TabControl>(MemberPage);
+            //页面加载
+            LoadedCommand = new RelayCommand(Load);
+
+            
         }
         #region 属性
         /// <summary>
         /// 选项卡
         /// </summary>
         public static TabControl TC;
+
+        public int StaffIDNow;//当前用户ID
+        
+        //当前用户名称
+        private string _staffName;
+        public string StaffName
+        {
+            get { return _staffName; }
+            set
+            {
+                if (_staffName != value)
+                {
+                    _staffName = value;
+                    RaisePropertyChanged(() => StaffName);
+                }
+            }
+        }
         #endregion
 
         #region 命令
@@ -64,6 +88,14 @@ namespace DrinksSystem.ViewModels
         /// 进入收银台
         /// </summary>
         public RelayCommand<Window> CheckoutCounterCommand { get; set; }
+        /// <summary>
+        /// 会员管理
+        /// </summary>
+        public RelayCommand<TabControl> MemberPageCommand { get; set; }
+        /// <summary>
+        /// 页面加载
+        /// </summary>
+        public RelayCommand LoadedCommand { get; set; }
         #endregion
 
         #region 函数
@@ -114,7 +146,12 @@ namespace DrinksSystem.ViewModels
                 TC.SelectedItem = item;
             }
         }
-
+        //加载
+        private void Load()
+        {
+            var list = (from tb in myModel.S_Staff where tb.staffID == StaffIDNow select tb).Single();
+            StaffName = "当前用户：" + list.staffName;
+        }
         #endregion
 
         #region 页面嵌套
@@ -155,6 +192,17 @@ namespace DrinksSystem.ViewModels
             AddItem("交接班管理", myHandover);
         }
         /// <summary>
+        /// 会员管理
+        /// </summary>
+        private void MemberPage(TabControl tc)
+        {
+            TC = tc;
+            MemberView myMember = new MemberView();
+            var myMemberVModel = (myMember.DataContext as DrinksSystem.ViewModels.MemberVModel.MemberVModel);
+            myMemberVModel.StaffIDNow = StaffIDNow;//传递当前用户ID
+            AddItem("会员管理", myMember);
+        }
+        /// <summary>
         /// 进入收银台
         /// </summary>
         private void CheckoutCounter(Window wd)
@@ -162,6 +210,7 @@ namespace DrinksSystem.ViewModels
             CheckoutCounterView myCheckoutCounte = new CheckoutCounterView();
             var myCheckoutCounteVModel = (myCheckoutCounte.DataContext as DrinksSystem.ViewModels.CheckoutCounterVModel.CheckoutCounterVModel);
             //myCheckoutCounteVModel.ProductTypeData = new List<S_Dictionary>();
+            myCheckoutCounteVModel.StaffNow = (from tb in myModel.S_Staff where tb.staffID == StaffIDNow select tb).Single();
             myCheckoutCounte.Show();
             wd.Close();
         }

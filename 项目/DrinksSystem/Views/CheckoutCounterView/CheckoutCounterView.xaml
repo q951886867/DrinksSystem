@@ -329,6 +329,12 @@
                                                       ToolTip="系统操作"  HorizontalAlignment="Right" Margin="20 0 0 0"
                                                       Width="130" VerticalAlignment="Center"  BorderThickness="0" >
                                 <StackPanel>
+                                    <Button  Command="{Binding EnterBackgroundCommand}" CommandParameter="{Binding ElementName= CheckoutCounterWindow}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="ApplicationCog" />
+                                            <TextBlock Text=" 后台" FontSize="14"/>
+                                        </StackPanel>
+                                    </Button>
                                     <Button  >
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="LockOutline" />

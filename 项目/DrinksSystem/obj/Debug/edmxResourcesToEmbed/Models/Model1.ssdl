@@ -25,6 +25,7 @@
     <Property Name="promotionalAmount" Type="decimal" Precision="18" Scale="0" />
     <Property Name="promotionalIntegral" Type="decimal" Precision="18" Scale="0" />
     <Property Name="totalAmount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="remark" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="B_SalesRecord">
     <Key>

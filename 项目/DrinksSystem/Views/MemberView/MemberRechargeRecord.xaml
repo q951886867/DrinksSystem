@@ -1,0 +1,109 @@
+﻿<Window x:Class="DrinksSystem.Views.MemberView.MemberRechargeRecord"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:controls="clr-namespace:DrinksSystem.Resources.PublicClass"
+        x:Name="addOrUpdateWindow"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen" 
+        ResizeMode="NoResize"
+        WindowState="Maximized" 
+        AllowsTransparency="True"
+        Background="#AA3E3E3E"
+        Title="addOrUpadteProduc" Height="1080" Width="1920">
+    <Border x:Name="border1" Width="1000" Height="650" Background="#fbfbfd"  CornerRadius="3">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="8*"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <TextBox x:Name="conditionTextBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Center" HorizontalAlignment="Left" 
+                             BorderBrush="#dfe4ea" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"  Text="{Binding SelectTxt}"
+                             materialDesign:HintAssist.Hint="输入会员名称或卡号搜索"  Width="250" Height="40" Margin=" 20 0 0 0" Padding="5 10 0 0" FontSize="14" Foreground="#8d8f8f" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="KeyUp">
+                            <i:InvokeCommandAction Command="{Binding KeyUpCommand}" CommandParameter="{Binding ElementName=conditionTextBox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+                
+                <Border BorderThickness="0 0 0 1" BorderBrush="#dfe4ea" Margin="20 0 20 0"></Border>
+                <Button Style="{StaticResource MaterialDesignRaisedLightButton}" ToolTip="CloseWindow"
+                        Width="50" HorizontalAlignment="Right" Foreground="#1d1d1f " Margin="0 0 0 0" Background="{x:Null}" BorderBrush="{x:Null}"
+                        Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=addOrUpdateWindow}">
+                    <materialDesign:PackIcon Kind="WindowClose" >
+                    </materialDesign:PackIcon>
+                </Button>
+            </Grid>
+            <!--DataGrid表格-->
+            <DataGrid Grid.Row="1" Margin="20"  ItemsSource="{Binding MemberRechargeRecord}"
+                  CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="Column" 
+                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" Background="#fbfbfd"
+                  x:Name="yinDatagrid" controls:DataGridBehavior.RowNumbers="True" RowHeight="50">
+                <DataGrid.Columns >
+                    <DataGridTemplateColumn Width="80"
+                                        Header="序号"
+                                        IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}, Path=Header}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="会员卡号" Width="1*" x:Name="jajaj">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock   HorizontalAlignment="Center" Foreground="#1d1d1f" VerticalAlignment="Center" Text="{Binding memberNumber}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="会员姓名" Width="1*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Center" Foreground="#1d1d1f" VerticalAlignment="Center" Text="{Binding memberName}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="充值金额" Width="1*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Center" Foreground="#1d1d1f" VerticalAlignment="Center" Text="{Binding rechargeAmount}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="赠送金额" Width="1*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Center" Foreground="#1d1d1f" VerticalAlignment="Center" Text="{Binding promotionalAmount}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="合计金额" Width="1*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Center" Foreground="#1d1d1f" VerticalAlignment="Center" Text="{Binding totalAmount}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="经办人" Width="1*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Center" Foreground="#1d1d1f" VerticalAlignment="Center" Text="{Binding staffName}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="备注" Width="1*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Center" Foreground="#1d1d1f" VerticalAlignment="Center" Text="{Binding remark}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Border>   
+</Window>
