@@ -114,10 +114,42 @@ namespace DrinksSystem.ViewModels.MemberVModel
                 var res = MessageBoxX.Show("确定要删除该数据吗？", "提示", Application.Current.MainWindow, MessageBoxButton.YesNo);
                 if (res.ToString()== "Yes")
                 {
-                    S_Member myMember = MemberSelectEntity as S_Member;
-                    myModel.S_Member.Remove(myMember);
-                    myModel.SaveChanges();
-                    QueryCommandFunc();
+                    try
+                    {
+                        //引用事务
+                        using (System.Transactions.TransactionScope scope = new System.Transactions.TransactionScope())
+                        {
+                            S_Member myMember = MemberSelectEntity as S_Member;
+                            myModel.S_Member.Remove(myMember);
+                            myModel.SaveChanges();
+
+                            //循环删除该会员的所有充值记录
+                            var listCount = (from tb in myModel.B_MemberRechargeRecord
+                                             where tb.memberID == myMember.memberID
+                                             select tb).ToList();
+                            int a = 0;
+                            for (int i = 0; i < listCount.Count; i++)
+                            {
+                                B_MemberRechargeRecord myMemberRechargeRecord = new B_MemberRechargeRecord();
+                                myMemberRechargeRecord = listCount[i];
+                                myModel.B_MemberRechargeRecord.Remove(myMemberRechargeRecord);
+                                myModel.SaveChanges();
+                                a++;
+                            }
+                            if (a== listCount.Count)
+                            {
+                                Notice.Show("保存成功！", "提示", 2, MessageBoxIcon.Success);
+                                scope.Complete();//事务提交
+                                QueryCommandFunc();//刷新页面
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Notice.Show("删除失败！", "提示", 2, MessageBoxIcon.Error);
+                        Debug.WriteLine(e);
+                    }
+
                 }
             }
         }
