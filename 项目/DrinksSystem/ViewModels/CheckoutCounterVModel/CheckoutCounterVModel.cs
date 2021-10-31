@@ -32,6 +32,7 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
             DeleteClickCommand = new RelayCommand(DeleteClick);//销售区删除当前选中行
             FnishClickCommand = new RelayCommand(FnishClick);//制作完成点击
             MemberHandlingCommand = new RelayCommand(MemberHandling);//会员办理
+            RechargeClickCommand = new RelayCommand(RechargeClick);//会员充值
             EnterBackgroundCommand = new RelayCommand<Window>(EnterBackground);//进入后台
 
         }
@@ -247,6 +248,7 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
         public RelayCommand DeleteClickCommand { get; set; }//销售区 删除当前选中行
         public RelayCommand FnishClickCommand { get; set; }//制作完成点击
         public RelayCommand MemberHandlingCommand { get; set; }//会员办理
+        public RelayCommand RechargeClickCommand { get; set; }//会员充值
         public RelayCommand<Window> EnterBackgroundCommand { get; set; }//进入后台
         #endregion
 
@@ -270,8 +272,17 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
         }
         //会员办理
         private void MemberHandling()
-        { 
-             
+        {
+                var myVModel = new DrinksSystem.ViewModels.MemberVModel.MemberVModel();
+                myVModel.StaffIDNow = StaffNow.staffID;//当前用户
+                myVModel.ApplyMembership();//会员办理
+        }
+        //会员办理
+        private void RechargeClick()
+        {
+                var myVModel = new DrinksSystem.ViewModels.MemberVModel.MemberVModel();
+                myVModel.StaffIDNow = StaffNow.staffID;//当前用户
+                myVModel.MemberRecharge();//会员充值
         }
         //等待区 右键制作完成
         private void FnishClick()

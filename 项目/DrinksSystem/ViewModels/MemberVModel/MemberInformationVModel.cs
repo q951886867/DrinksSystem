@@ -1,4 +1,5 @@
 ﻿using DrinksSystem.Models;
+using DrinksSystem.Views.MemberView;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Panuon.UI.Silver;
@@ -109,7 +110,6 @@ namespace DrinksSystem.ViewModels.MemberVModel
                 WindowTitleText = "修改会员信息";
             }
         }
-        
         //关闭窗口
         public void Close(Window window)
         {
@@ -159,11 +159,11 @@ namespace DrinksSystem.ViewModels.MemberVModel
                                 myMember.memberBalance = myMember.memberBalance + promotionalamount;//实际到账金额 充值金额+赠送金额
                             }
                             myModel.S_Member.Add(myMember);
-                            myModel.SaveChanges();
 
                             //判断是否开户时 充值金额
                             if (MemberData.memberBalance > 0)
                             {
+                                myModel.SaveChanges();
                                 //获取上面新增的会员ID
                                 var list = (from tb in myModel.S_Member where tb.memberNumber == MemberData.memberNumber select tb).Single();
 

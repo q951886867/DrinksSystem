@@ -89,7 +89,7 @@ namespace DrinksSystem.ViewModels.MemberVModel
             myWindow.ShowDialog();
         }
         //会员充值
-        private void MemberRecharge()
+        public void MemberRecharge()
         {
             if (MemberSelectEntity!=null)
             {
@@ -143,7 +143,7 @@ namespace DrinksSystem.ViewModels.MemberVModel
 
         }
         //会员办理
-        private void ApplyMembership()
+        public void ApplyMembership()
         {
             MemberInformation myWindow = new MemberInformation();
             var myVModel=(myWindow.DataContext as MemberInformationVModel);

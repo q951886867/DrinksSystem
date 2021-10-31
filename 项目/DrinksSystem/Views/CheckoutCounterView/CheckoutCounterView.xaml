@@ -320,7 +320,7 @@
                                 Content="会员办理" Command="{Binding MemberHandlingCommand}" />
                             <Button Margin="5 0 5 0" Width="120" Height="40" Style="{StaticResource MaterialDesignFlatLightBgButton}" ToolTip="新增产品" Background="#50E997 " BorderBrush="#50E997"
                                 Foreground="#f5f5f7" VerticalAlignment="Bottom"
-                                Content="会员充值" Command="{Binding MinImizeCommand}" />
+                                Content="会员充值" Command="{Binding RechargeClickCommand}" />
                             
                             
                         </StackPanel>
