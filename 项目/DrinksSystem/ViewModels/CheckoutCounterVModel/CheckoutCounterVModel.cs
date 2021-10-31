@@ -1,6 +1,8 @@
 ﻿using DrinksSystem.Models;
 using DrinksSystem.Models.Vos;
+using DrinksSystem.ViewModels.MemberVModel;
 using DrinksSystem.Views.CheckoutCounterView;
+using DrinksSystem.Views.MemberView;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Panuon.UI.Silver;
@@ -277,12 +279,14 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
                 myVModel.StaffIDNow = StaffNow.staffID;//当前用户
                 myVModel.ApplyMembership();//会员办理
         }
-        //会员办理
+        //会员充值
         private void RechargeClick()
         {
-                var myVModel = new DrinksSystem.ViewModels.MemberVModel.MemberVModel();
-                myVModel.StaffIDNow = StaffNow.staffID;//当前用户
-                myVModel.MemberRecharge();//会员充值
+            MemberRechargeView myWindow = new MemberRechargeView();
+            var myVModel = myWindow.DataContext as MemberRechargeVModel;
+            myVModel.StaffIDNowID = StaffNow.staffID;//当前用户
+            myVModel.MemberData = new S_Member();
+            myWindow.ShowDialog();
         }
         //等待区 右键制作完成
         private void FnishClick()
