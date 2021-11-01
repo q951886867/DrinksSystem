@@ -344,7 +344,7 @@
                                             <TextBlock Text=" 锁定" FontSize="14"/>
                                         </StackPanel>
                                     </Button>
-                                    <Button  >
+                                    <Button  Command="{Binding HandoverCommand}">
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="AccountSwitch" />
                                             <TextBlock Text=" 交班" FontSize="14"/>

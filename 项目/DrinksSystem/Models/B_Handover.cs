@@ -18,10 +18,10 @@ namespace DrinksSystem.Models
         public Nullable<int> staffID { get; set; }
         public Nullable<System.DateTime> startTime { get; set; }
         public Nullable<System.DateTime> endTime { get; set; }
-        public Nullable<decimal> cashIncome { get; set; }
-        public Nullable<decimal> wechatIncome { get; set; }
+        public  Nullable<decimal> cashIncome { get; set; }
+        public  Nullable<decimal> wechatIncome { get; set; }
         public Nullable<decimal> amountHanded { get; set; }
         public Nullable<decimal> reserveFund { get; set; }
-        public Nullable<decimal> businessAmount { get; set; }
+        public  Nullable<decimal> businessAmount { get; set; }
     }
 }

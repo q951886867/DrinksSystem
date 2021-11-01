@@ -22,6 +22,7 @@ namespace DrinksSystem.ViewModels.HandoverVModel
             CloseCommand = new RelayCommand<Window>(CloseWindow);//关闭窗口
             SaveCommand = new RelayCommand<Window>(Save);//关闭窗口
             TextChangeCommand = new RelayCommand(TextChange);//关闭窗口
+            DateTieChangedCommand = new RelayCommand(CalculateBusinessAmount);//计算营业额
         }
 
         #region 属性
@@ -132,6 +133,7 @@ namespace DrinksSystem.ViewModels.HandoverVModel
                 }
             }
         }
+        public bool ifCheckout { get; set; } = false;//是否收银台操作标识
         #endregion
 
         #region 命令
@@ -139,9 +141,52 @@ namespace DrinksSystem.ViewModels.HandoverVModel
         public RelayCommand<Window> CloseCommand { get; set; }//关闭窗口
         public RelayCommand<Window> SaveCommand { get; set; }//保存
         public RelayCommand TextChangeCommand { get; set; }//保存
+        public RelayCommand DateTieChangedCommand { get; set; }//日期选中
         #endregion
 
         #region 函数
+        //根据当前日期 查询该期间 该员工的 订单流水金额
+        private void CalculateBusinessAmount()
+        {
+            if (ifCheckout)
+            {
+                if (StartDate!=null&& StartTime!=null&& EndDate!= null && EndTime!= null && HandoverData.staffID!=null && Convert.ToDateTime(StartTime)<Convert.ToDateTime(EndTime))
+                {
+                    //起始
+                    var dateStartDate = Convert.ToDateTime(StartDate);//字符串转换DateTime
+                    var shortDateStartDate = dateStartDate.ToShortDateString();//DateTime转换 yyyy-MM-dd
+                    var timeStartTime = Convert.ToDateTime(StartTime);//字符串转换DateTime
+                    var shortStartTime = timeStartTime.ToLongTimeString();//DateTime转换 HH:mm:ss
+                    string startdatetime = shortDateStartDate + " " + shortStartTime;//拼接日期和时间
+
+                    //结束
+                    var dateEndDate = Convert.ToDateTime(EndDate);//字符串转换DateTime
+                    var shortDateEndDate = dateEndDate.ToShortDateString();//DateTime转换 yyyy-MM-dd
+                    var timeEndTime = Convert.ToDateTime(EndTime);//字符串转换DateTime
+                    var shortEndTime = timeEndTime.ToShortTimeString();//DateTime转换 HH:mm:ss
+                    string enddatetime = shortDateEndDate + " " + shortEndTime;//拼接日期和时间
+
+                    DateTime start = Convert.ToDateTime(startdatetime);
+                    DateTime end = Convert.ToDateTime(enddatetime);
+                    //根据选中的时间段之间 和当前的员工ID 查询订单
+                    var list = (from tb in myModel.B_SalesRecord
+                                where tb.staffID == HandoverData.staffID && tb.salesTime >= start && tb.salesTime <= end
+                                select tb).ToList();
+
+                    //循环计算微信收入金额 和 现金收入金额
+                    decimal cash = 0; 
+                    decimal wechat = 0; 
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        cash += Convert.ToDecimal(list[i].cashPay);//现金
+                        wechat += Convert.ToDecimal(list[i].wechatPay);//微信
+                    }
+                    HandoverData.cashIncome = cash;
+                    HandoverData.wechatIncome = wechat;
+                    TextChange();//更新营业总额
+                }
+            }
+        }
         //加载
         private void Load()
         {
@@ -166,17 +211,6 @@ namespace DrinksSystem.ViewModels.HandoverVModel
                 HandoverData.amountHanded != null && HandoverData.reserveFund != null && HandoverData.businessAmount != null
                 && StartDate != null && StartTime != null && EndDate != null && EndTime != null)
             {
-                //获取页面数据
-                B_Handover myHandover = new B_Handover()
-                {
-                    cashIncome = HandoverData.cashIncome,
-                    wechatIncome = HandoverData.wechatIncome,
-                    amountHanded = HandoverData.amountHanded,
-                    reserveFund = HandoverData.reserveFund,
-                    businessAmount = HandoverData.businessAmount,
-                    staffID = HandoverData.staffID,
-                };
-
                 //起始
                 var dateStartDate = Convert.ToDateTime(StartDate);//字符串转换DateTime
                 var shortDateStartDate = dateStartDate.ToShortDateString();//DateTime转换 yyyy-MM-dd
@@ -191,40 +225,72 @@ namespace DrinksSystem.ViewModels.HandoverVModel
                 var shortEndTime = timeEndTime.ToShortTimeString();//DateTime转换 HH:mm:ss
                 string enddatetime = shortDateEndDate + " " + shortEndTime;//拼接日期和时间
 
-                //赋值
-                myHandover.startTime = Convert.ToDateTime(startdatetime);
-                myHandover.endTime = Convert.ToDateTime(enddatetime);
-
-                if (IsAdd)
+                if (Convert.ToDateTime(startdatetime) < Convert.ToDateTime(enddatetime))
                 {
-                    myModel.B_Handover.Add(myHandover);
-                    if (myModel.SaveChanges() > 0)
+                    if ((HandoverData.amountHanded+ HandoverData.reserveFund)== HandoverData.businessAmount)
                     {
-                        Notice.Show("新增成功", "提示", 2, MessageBoxIcon.Success);
-                        HandoverRefresh();//委托刷新
-                        window.Close();//关闭窗口
+                        //获取页面数据
+                        B_Handover myHandover = new B_Handover()
+                        {
+                            cashIncome = HandoverData.cashIncome,
+                            wechatIncome = HandoverData.wechatIncome,
+                            amountHanded = HandoverData.amountHanded,
+                            reserveFund = HandoverData.reserveFund,
+                            businessAmount = HandoverData.businessAmount,
+                            staffID = HandoverData.staffID,
+                        };
+
+
+
+                        //赋值
+                        myHandover.startTime = Convert.ToDateTime(startdatetime);
+                        myHandover.endTime = Convert.ToDateTime(enddatetime);
+
+                        if (IsAdd)
+                        {
+                            myModel.B_Handover.Add(myHandover);
+                            if (myModel.SaveChanges() > 0)
+                            {
+                                Notice.Show("新增成功", "提示", 2, MessageBoxIcon.Success);
+                                if (HandoverRefresh != null)
+                                {
+                                    HandoverRefresh();//委托刷新
+                                }
+                                window.Close();//关闭窗口
+                            }
+                            else
+                            {
+                                Notice.Show("新增失败", "提示", 2, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                        {
+                            myHandover.handoverID = HandoverData.handoverID;
+                            myModel.Entry(myHandover).State = System.Data.Entity.EntityState.Modified;
+                            if (myModel.SaveChanges() > 0)
+                            {
+                                Notice.Show("修改成功", "提示", 2, MessageBoxIcon.Success);
+                                if (HandoverRefresh != null)
+                                {
+                                    HandoverRefresh();//委托刷新
+                                }
+                                window.Close();//关闭窗口
+                            }
+                            else
+                            {
+                                Notice.Show("修改失败", "提示", 2, MessageBoxIcon.Error);
+                            }
+                        }
                     }
                     else
                     {
-                        Notice.Show("新增失败", "提示", 2, MessageBoxIcon.Error);
+                        Notice.Show("上交金额和下放金额与营业金额不匹配", "提示", 2, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    myHandover.handoverID = HandoverData.handoverID;
-                    myModel.Entry(myHandover).State = System.Data.Entity.EntityState.Modified;
-                    if (myModel.SaveChanges() > 0)
-                    {
-                        Notice.Show("修改成功", "提示", 2, MessageBoxIcon.Success);
-                        HandoverRefresh();//委托刷新
-                        window.Close();//关闭窗口
-                    }
-                    else
-                    {
-                        Notice.Show("修改失败", "提示", 2, MessageBoxIcon.Error);
-                    }
+                    Notice.Show("起始时间不能大于结束时间", "提示", 2, MessageBoxIcon.Error);
                 }
-                
             }
         }
         //TextChang  计算总营业额

@@ -1,7 +1,9 @@
 ﻿using DrinksSystem.Models;
 using DrinksSystem.Models.Vos;
+using DrinksSystem.ViewModels.HandoverVModel;
 using DrinksSystem.ViewModels.MemberVModel;
 using DrinksSystem.Views.CheckoutCounterView;
+using DrinksSystem.Views.HandoverView;
 using DrinksSystem.Views.MemberView;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -39,6 +41,7 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
             LogoutCommand = new RelayCommand<Window>(Logout);//注销
             lockCommand = new RelayCommand<Grid>(lockWindow);//锁定
             UnlockCommand = new RelayCommand<PasswordBox>(Unlock);//解锁
+            HandoverCommand = new RelayCommand(Handover);//
 
         }
         #region 属性
@@ -260,8 +263,24 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
         public RelayCommand<Window> LogoutCommand { get; set; }//进入后台
         public RelayCommand<Grid> lockCommand { get; set; }//锁定
         public RelayCommand<PasswordBox> UnlockCommand { get; set; }//解锁
+        public RelayCommand HandoverCommand { get; set; }//交接班
         #endregion
         #region 函数
+        //交接班
+        public void Handover()
+        {
+
+            addOrUpdateHandover myWindow1 = new addOrUpdateHandover();
+            var myDataContext1 = myWindow1.DataContext as addOrUpdateHandoverVModel;
+            myDataContext1.HandoverData = new HandoverVo();
+            myDataContext1.IsAdd = true;//新增修改 标识
+            myDataContext1.WindowTitle = "新增交班记录";
+            myDataContext1.EndDate = DateTime.Now.ToString();//结束日期
+            myDataContext1.EndTime = DateTime.Now.ToString();//结束时间
+            myDataContext1.HandoverData.staffID = StaffNow.staffID;//当前员工
+            myDataContext1.ifCheckout = true;//收银台操作标识
+            myWindow1.ShowDialog();
+        }
         //解锁
         private void Unlock(PasswordBox pBox)
         {
@@ -385,7 +404,7 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
                          select tb).ToList();
             //查询已制作完成的订单
             var list1 = (from tb in myModel.B_SalesRecord
-                        where tb.orderStatus == true
+                        where tb.orderStatus == true &&tb.salesTime > DateTime.Today //已完成订单部分 仅查询当天的
                          orderby tb.salesTime descending
                          select tb).ToList();
             //把 list1追加到list 数据后面 (顶部优先显示 正在制作的订单 方便客人查看)

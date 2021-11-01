@@ -24,7 +24,41 @@ namespace DrinksSystem.Models.Vos
                 _businessAmount = value;
                 if (PropertyChanged != null)//有改变
                 {
-                    PropertyChanged(this, new PropertyChangedEventArgs("businessAmount"));//对quantity进行监听
+                    PropertyChanged(this, new PropertyChangedEventArgs("businessAmount"));
+                }
+            }
+        }
+
+        private decimal? _cashIncome { get; set; }
+        public new decimal? cashIncome
+        {
+            get
+            {
+                return _cashIncome;
+            }
+            set
+            {
+                _cashIncome = value;
+                if (PropertyChanged != null)//有改变
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("cashIncome"));
+                }
+            }
+        }
+
+        private decimal? _wechatIncome { get; set; }
+        public new decimal? wechatIncome
+        {
+            get
+            {
+                return _wechatIncome;
+            }
+            set
+            {
+                _wechatIncome = value;
+                if (PropertyChanged != null)//有改变
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("wechatIncome"));
                 }
             }
         }

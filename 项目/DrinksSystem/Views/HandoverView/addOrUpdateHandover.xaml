@@ -46,19 +46,44 @@
                         <TextBlock Text="开始时间：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
                         <DatePicker x:Name="FutureDatePicker1" Width="110" Margin="15 0 0 0" 
                                     materialDesign:HintAssist.Hint="起始日期" materialDesign:CalendarAssist.IsHeaderVisible="False"
-                                    SelectedDate="{Binding StartDate}" DisplayDateEnd="{Binding SelectedDate,ElementName=FutureDatePicker2}"/>
+                                    SelectedDate="{Binding StartDate}" DisplayDateEnd="{Binding SelectedDate,ElementName=FutureDatePicker2}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectedDateChanged">
+                                    <i:InvokeCommandAction Command="{Binding DateTieChangedCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </DatePicker>
                         <materialDesign:TimePicker x:Name="PresetTimePicker1" materialDesign:HintAssist.Hint="起始时间"  
                                                    Is24Hours="True" Width="85" Margin="5 0 0 0" 
-                                                   SelectedTime="{Binding StartTime}"/>
+                                                   SelectedTime="{Binding StartTime}" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectedTimeChanged">
+                                    <i:InvokeCommandAction Command="{Binding DateTieChangedCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </materialDesign:TimePicker>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <TextBlock Text="结束时间：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
                         <DatePicker x:Name="FutureDatePicker2" Width="110" Margin="15 0 0 0" 
                                     materialDesign:HintAssist.Hint="结束日期" materialDesign:CalendarAssist.IsHeaderVisible="False"
-                                    SelectedDate="{Binding EndDate}" DisplayDateStart="{Binding SelectedDate,ElementName=FutureDatePicker1}"/>
+                                    SelectedDate="{Binding EndDate}" DisplayDateStart="{Binding SelectedDate,ElementName=FutureDatePicker1}"
+                                    >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectedDateChanged">
+                                    <i:InvokeCommandAction Command="{Binding DateTieChangedCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </DatePicker>
                         <materialDesign:TimePicker x:Name="PresetTimePicker2"  materialDesign:HintAssist.Hint="结束时间" 
                                                    Is24Hours="True" Width="85" Margin="5 0 0 0" 
-                                                   SelectedTime="{Binding EndTime}"/>
+                                                   SelectedTime="{Binding EndTime}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectedTimeChanged">
+                                    <i:InvokeCommandAction Command="{Binding DateTieChangedCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </materialDesign:TimePicker>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         <TextBlock Text="该班员工：" FontSize="14" Foreground="#1d1d1f"  VerticalAlignment="Center"/>
