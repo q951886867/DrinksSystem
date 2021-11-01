@@ -10,7 +10,7 @@
         Background="#003E3E3E"
         
         WindowStartupLocation="CenterScreen" 
-        Title="KOKO饮品管理系统" Height="696.25" >
+        Title="KOKO饮品管理系统" >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=LoginWin}" />
@@ -19,13 +19,13 @@
             <i:InvokeCommandAction Command="{Binding DragMoveCommand}" CommandParameter="{Binding ElementName=LoginWin}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid Height="570" Width="360">
+    <Grid Height="600" Width="360">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.8*"/>
-            <RowDefinition Height="2.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
-        <Border Grid.RowSpan="5" Background="#fbfbfd" CornerRadius="10" BorderThickness="1" BorderBrush="#dfe4ea">
+        <Border Grid.RowSpan="5" Background="#fbfbfd" CornerRadius="15" BorderThickness="1" BorderBrush="#dfe4ea">
             <!--窗口阴影-->
             <Border.Effect>
                 <DropShadowEffect BlurRadius="30" Direction="-100" RenderingBias="Quality" ShadowDepth="1" Color="#FFe6e8ec" Opacity="1"/>
@@ -55,13 +55,13 @@
         
         <!--LOGO-->
         <Grid Grid.Row="1">
-            <Image   Source="/Resources/ima/SYSTEM.png" Width="150"   Margin="0 30 0 0"/>
+            <Image   Source="/Resources/ima/SYSTEM.png" Width="250"   Margin="0 30 0 0"/>
         </Grid>
         <!--下方-->
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="6.5*"/>
+                <RowDefinition Height="2.5*"/>
+                <RowDefinition Height="6*"/>
                 <RowDefinition Height="1.7*"/>
             </Grid.RowDefinitions>
             <!--系统标题-->

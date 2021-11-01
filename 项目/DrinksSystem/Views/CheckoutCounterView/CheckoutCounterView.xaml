@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
         xmlns:controls="clr-namespace:DrinksSystem.Resources.PublicClass"
         x:Name="CheckoutCounterWindow"
         WindowStyle="None"
         WindowState="Maximized"
         Height="1080" Width="1920" Background="#f3f5f8">
-    
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=WP_Simers}"/>
@@ -22,6 +22,9 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="18*"/>
         </Grid.RowDefinitions>
+
+
+
         <!--窗口标题-->
         <Grid  Background="#fbfbfd" Margin="0 0 0 10">
             <TextBlock Text="{Binding CurrentUser,Mode=TwoWay}" VerticalAlignment="Center" FontSize="14" Foreground="#a4b0be" Margin="20 0 0 0"/>
@@ -69,7 +72,7 @@
                   CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="Column" 
                   CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" Background="#fbfbfd"
                   x:Name="yinDatagrid" controls:DataGridBehavior.RowNumbers="True" RowHeight="40">
-                            
+
                             <DataGrid.Columns >
                                 <DataGridTemplateColumn Width="80"
                                         Header="序号"
@@ -321,8 +324,8 @@
                             <Button Margin="5 0 5 0" Width="120" Height="40" Style="{StaticResource MaterialDesignFlatLightBgButton}" ToolTip="新增产品" Background="#50E997 " BorderBrush="#50E997"
                                 Foreground="#f5f5f7" VerticalAlignment="Bottom"
                                 Content="会员充值" Command="{Binding RechargeClickCommand}" />
-                            
-                            
+
+
                         </StackPanel>
                         <Grid Grid.Column="1">
                             <materialDesign:PopupBox  PlacementMode="BottomAndAlignCentres" ToolTipService.Placement="Top" 
@@ -335,7 +338,7 @@
                                             <TextBlock Text=" 后台" FontSize="14"/>
                                         </StackPanel>
                                     </Button>
-                                    <Button  >
+                                    <Button  Command="{Binding lockCommand}" CommandParameter="{Binding ElementName=lockView}">
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="LockOutline" />
                                             <TextBlock Text=" 锁定" FontSize="14"/>
@@ -347,10 +350,10 @@
                                             <TextBlock Text=" 交班" FontSize="14"/>
                                         </StackPanel>
                                     </Button>
-                                    <Button  >
+                                    <Button  Command="{Binding LogoutCommand}" CommandParameter="{Binding ElementName= CheckoutCounterWindow}">
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="ExitToApp" />
-                                            <TextBlock Text=" 退出" FontSize="14"/>
+                                            <TextBlock Text=" 注销" FontSize="14"/>
                                         </StackPanel>
                                     </Button>
                                 </StackPanel>
@@ -361,5 +364,52 @@
             </Border>
         </Grid>
 
+        <Grid x:Name="lockView" Grid.RowSpan="4" Background="#AA3E3E3E"  Visibility="Collapsed" >
+            <Border x:Name="border1" Width="350" Height="500" CornerRadius="20" Background="#ffffff">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4.5*"/>
+                        <RowDefinition Height="6*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel VerticalAlignment="Center">
+                        <Image Source="/Resources/ima/已锁定.jpg" Width="200"/>
+                    </StackPanel>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="7*"/>
+                            <RowDefinition Height="3*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel >
+                            <TextBlock Text="系统已锁定" FontSize="24" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Foreground="#a4b0be" Margin="0 10 0 10"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
+                                <TextBlock Text="姓名：" Foreground="#8d8f8f"  FontSize="14" VerticalAlignment="Center"/>
+                                <TextBox Margin="10 0 0 0" x:Name="TextBox1" BorderThickness="1" Text="{Binding StaffNow.staffName,Mode=TwoWay}" 
+                                             BorderBrush="#dfe4ea" Width="170" Height="30" Foreground="#8d8f8f" FontSize="14"  IsEnabled="False"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
+                                <TextBlock Text="账号：" Foreground="#8d8f8f"  FontSize="14" VerticalAlignment="Center"/>
+                                <TextBox Margin="10 0 0 0" x:Name="TextBox2"  Text="{Binding StaffNow.staffNumber,Mode=TwoWay}" 
+                                             BorderBrush="#dfe4ea" Width="170" Height="30" Foreground="#8d8f8f" FontSize="14" IsEnabled="False"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
+                                <TextBlock Text="密码：" Foreground="#8d8f8f"  FontSize="14" VerticalAlignment="Center"/>
+                                <PasswordBox Margin="10 0 0 0" x:Name="TextBox3"
+                                             BorderBrush="#dfe4ea" Width="170"  Height="30" Foreground="#8d8f8f" FontSize="14" />
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button  Width="50" Height="35" Style="{StaticResource MaterialDesignOutlinedButton}"  materialDesign:ButtonAssist.CornerRadius="7"
+                          BorderBrush="{x:Null}" Command="{ Binding UnlockCommand}" CommandParameter="{Binding ElementName=TextBox3}"  ToolTip="进入系统">
+                                <materialDesign:PackIcon Kind="LockOpenVariantOutline" Foreground="#2c68ff"/>
+                            </Button>
+                            <Button  Width="50" Height="35" Style="{StaticResource MaterialDesignOutlinedButton}" materialDesign:ButtonAssist.CornerRadius="7"
+                         BorderBrush="{x:Null}" Command="{Binding CloseCommand}"  CommandParameter="{Binding ElementName=CheckoutCounterWindow}"  ToolTip="退出系统">
+                                <materialDesign:PackIcon Kind="ExitToApp" Foreground="#ff4d4f"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </Window>

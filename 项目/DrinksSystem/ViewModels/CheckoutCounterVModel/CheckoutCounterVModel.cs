@@ -36,6 +36,9 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
             MemberHandlingCommand = new RelayCommand(MemberHandling);//会员办理
             RechargeClickCommand = new RelayCommand(RechargeClick);//会员充值
             EnterBackgroundCommand = new RelayCommand<Window>(EnterBackground);//进入后台
+            LogoutCommand = new RelayCommand<Window>(Logout);//注销
+            lockCommand = new RelayCommand<Grid>(lockWindow);//锁定
+            UnlockCommand = new RelayCommand<PasswordBox>(Unlock);//解锁
 
         }
         #region 属性
@@ -208,7 +211,7 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
                 }
             }
         }
-        //当前用户
+        //当前用户名称
         private string _currentUser;
         public string CurrentUser
         {
@@ -236,6 +239,8 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
                 }
             }
         }
+        private bool IfLock { get; set; } = false;//是否进入了锁定状态
+        private Grid gridcontrol { get; set; } = new Grid();//锁定页面控件
         #endregion
 
         #region 命令
@@ -252,9 +257,54 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
         public RelayCommand MemberHandlingCommand { get; set; }//会员办理
         public RelayCommand RechargeClickCommand { get; set; }//会员充值
         public RelayCommand<Window> EnterBackgroundCommand { get; set; }//进入后台
+        public RelayCommand<Window> LogoutCommand { get; set; }//进入后台
+        public RelayCommand<Grid> lockCommand { get; set; }//锁定
+        public RelayCommand<PasswordBox> UnlockCommand { get; set; }//解锁
         #endregion
-
         #region 函数
+        //解锁
+        private void Unlock(PasswordBox pBox)
+        {
+            if (IfLock)
+            {
+                string passWord = pBox.Password.ToString();
+                if (passWord!="")
+                {
+                    if (passWord == StaffNow.staffPassword)
+                    {
+                        gridcontrol.Visibility = System.Windows.Visibility.Collapsed;//锁定页面隐藏
+                        IfLock = false;//是否为锁定状态标识
+                        gridcontrol = new Grid();
+                        pBox.Password = "";
+                    }
+                    else
+                    {
+                        Notice.Show("密码错误", "提示", 2, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    Notice.Show("请输入密码", "提示", 2, MessageBoxIcon.Error);
+                }
+            }
+        }
+        //锁定
+        private void lockWindow(Grid control)
+        {
+            if (control!=null)
+            {
+                gridcontrol = control;
+                control.Visibility = System.Windows.Visibility.Visible;//锁定页面显示
+                IfLock = true;//是否为锁定状态标识
+            }
+        }
+        //注销
+        private void Logout(Window window )
+        {
+            LoginWindow myLoginWindow = new LoginWindow();
+            window.Close();
+            myLoginWindow.Show();
+        }
         //进入后台
         private void EnterBackground(Window window)
         {
