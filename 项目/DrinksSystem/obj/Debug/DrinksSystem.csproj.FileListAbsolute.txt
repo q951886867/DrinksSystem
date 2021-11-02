@@ -203,3 +203,5 @@ D:\code\饮品管理系统\项目\DrinksSystem\obj\Debug\Views\MemberView\Member
 D:\code\饮品管理系统\项目\DrinksSystem\obj\Debug\Views\MemberView\MemberRechargeView.g.cs
 D:\code\饮品管理系统\项目\DrinksSystem\obj\Debug\Views\MemberView\MemberRechargeRecord.baml
 D:\code\饮品管理系统\项目\DrinksSystem\obj\Debug\Views\MemberView\MemberRechargeRecord.g.cs
+D:\code\饮品管理系统\项目\DrinksSystem\obj\Debug\Views\SaleView\SalesManagementView.g.cs
+D:\code\饮品管理系统\项目\DrinksSystem\obj\Debug\Views\SaleView\SalesManagementView.baml

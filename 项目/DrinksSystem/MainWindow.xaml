@@ -120,6 +120,11 @@
                     <TreeViewItem  FontSize="14"  Margin="0 5 0 0">
                         <TreeViewItem.Header>
                             <StackPanel Orientation="Horizontal">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <i:InvokeCommandAction Command="{Binding SalePageCommand}" CommandParameter="{Binding ElementName=tab_Main}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                                 <TextBlock Foreground="#1d1d1f" Text="&#xe809;"   FontFamily="Resources/icon/#iconfont" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 10 3"/>
                                 <TextBlock Margin="8 0 0 0" Text="销售管理" />
                             </StackPanel>

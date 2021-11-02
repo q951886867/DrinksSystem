@@ -5,6 +5,7 @@ using DrinksSystem.Views.DictionaryView;
 using DrinksSystem.Views.HandoverView;
 using DrinksSystem.Views.MemberView;
 using DrinksSystem.Views.Product;
+using DrinksSystem.Views.SaleView;
 using DrinksSystem.Views.StaffView;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -38,6 +39,8 @@ namespace DrinksSystem.ViewModels
             CheckoutCounterCommand = new RelayCommand<Window>(CheckoutCounter);
             //会员管理
             MemberPageCommand = new RelayCommand<TabControl>(MemberPage);
+            //销售管理
+            SalePageCommand = new RelayCommand<TabControl>(SalePage);
             //页面加载
             LoadedCommand = new RelayCommand(Load);
 
@@ -96,6 +99,10 @@ namespace DrinksSystem.ViewModels
         /// 页面加载
         /// </summary>
         public RelayCommand LoadedCommand { get; set; }
+        /// <summary>
+        /// 销售管理
+        /// </summary>
+        public RelayCommand<TabControl> SalePageCommand { get; set; }
         #endregion
 
         #region 函数
@@ -201,6 +208,15 @@ namespace DrinksSystem.ViewModels
             var myMemberVModel = (myMember.DataContext as DrinksSystem.ViewModels.MemberVModel.MemberVModel);
             myMemberVModel.StaffIDNow = StaffIDNow;//传递当前用户ID
             AddItem("会员管理", myMember);
+        }
+        /// <summary>
+        /// 销售管理
+        /// </summary>
+        private void SalePage(TabControl tc)
+        {
+            TC = tc;
+            SalesManagementView mySale = new SalesManagementView();
+            AddItem("销售管理", mySale);
         }
         /// <summary>
         /// 进入收银台

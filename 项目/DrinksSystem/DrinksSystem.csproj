@@ -133,6 +133,8 @@
     <Compile Include="Models\Vos\MemberRechargeRecordVo.cs" />
     <Compile Include="Models\Vos\ProductDetailVo.cs" />
     <Compile Include="Models\Vos\ProductVo.cs" />
+    <Compile Include="Models\Vos\SalesOrderDetailVos.cs" />
+    <Compile Include="Models\Vos\SalesOrderVos.cs" />
     <Compile Include="Models\Vos\SalesRecordVo.cs" />
     <Compile Include="Models\Vos\StaffVO.cs" />
     <Compile Include="Resources\control\Pager.xaml.cs">
@@ -168,6 +170,7 @@
     <Compile Include="ViewModels\MemberVModel\MemberVModel.cs" />
     <Compile Include="ViewModels\ProductVModel\addOrUpadteProducVModel.cs" />
     <Compile Include="ViewModels\ProductVModel\ProductVModel.cs" />
+    <Compile Include="ViewModels\SaleVModel\SalesManagementVModel.cs" />
     <Compile Include="ViewModels\StaffVModel\addOrUpdateStaffVModel.cs" />
     <Compile Include="ViewModels\StaffVModel\StaffVModel.cs" />
     <Compile Include="Views\CheckoutCounterView\CheckoutCounterView.xaml.cs">
@@ -211,6 +214,9 @@
     </Compile>
     <Compile Include="Views\Product\Produc.xaml.cs">
       <DependentUpon>Produc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleView\SalesManagementView.xaml.cs">
+      <DependentUpon>SalesManagementView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StaffView\addOrUpdateStaffView.xaml.cs">
       <DependentUpon>addOrUpdateStaffView.xaml</DependentUpon>
@@ -310,6 +316,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Product\Produc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleView\SalesManagementView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
