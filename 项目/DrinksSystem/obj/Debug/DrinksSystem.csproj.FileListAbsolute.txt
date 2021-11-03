@@ -205,3 +205,11 @@ D:\code\饮品管理系统\项目\DrinksSystem\obj\Debug\Views\MemberView\Member
 D:\code\饮品管理系统\项目\DrinksSystem\obj\Debug\Views\MemberView\MemberRechargeRecord.g.cs
 D:\code\饮品管理系统\项目\DrinksSystem\obj\Debug\Views\SaleView\SalesManagementView.g.cs
 D:\code\饮品管理系统\项目\DrinksSystem\obj\Debug\Views\SaleView\SalesManagementView.baml
+D:\code\饮品管理系统\项目\DrinksSystem\obj\Debug\Views\HomeView\HomeView.baml
+D:\code\饮品管理系统\项目\DrinksSystem\obj\Debug\Views\HomeView\HomeView.g.cs
+D:\code\饮品管理系统\项目\DrinksSystem\bin\Debug\LiveCharts.dll
+D:\code\饮品管理系统\项目\DrinksSystem\bin\Debug\LiveCharts.Wpf.dll
+D:\code\饮品管理系统\项目\DrinksSystem\bin\Debug\LiveCharts.pdb
+D:\code\饮品管理系统\项目\DrinksSystem\bin\Debug\LiveCharts.xml
+D:\code\饮品管理系统\项目\DrinksSystem\bin\Debug\LiveCharts.Wpf.pdb
+D:\code\饮品管理系统\项目\DrinksSystem\bin\Debug\LiveCharts.Wpf.xml

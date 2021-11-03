@@ -25,7 +25,7 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
-        <Border Grid.RowSpan="5" Background="#fbfbfd" CornerRadius="15" BorderThickness="1" BorderBrush="#dfe4ea">
+        <Border Grid.RowSpan="5" Background="#ffffff" CornerRadius="15" BorderThickness="1" BorderBrush="#dfe4ea">
             <!--窗口阴影-->
             <Border.Effect>
                 <DropShadowEffect BlurRadius="30" Direction="-100" RenderingBias="Quality" ShadowDepth="1" Color="#FFe6e8ec" Opacity="1"/>

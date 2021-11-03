@@ -3,6 +3,7 @@ using DrinksSystem.Resources.control;
 using DrinksSystem.Views.CheckoutCounterView;
 using DrinksSystem.Views.DictionaryView;
 using DrinksSystem.Views.HandoverView;
+using DrinksSystem.Views.HomeView;
 using DrinksSystem.Views.MemberView;
 using DrinksSystem.Views.Product;
 using DrinksSystem.Views.SaleView;
@@ -41,6 +42,8 @@ namespace DrinksSystem.ViewModels
             MemberPageCommand = new RelayCommand<TabControl>(MemberPage);
             //销售管理
             SalePageCommand = new RelayCommand<TabControl>(SalePage);
+            //首页
+            HomePageCommand = new RelayCommand<TabControl>(HomePage);
             //页面加载
             LoadedCommand = new RelayCommand(Load);
 
@@ -103,6 +106,10 @@ namespace DrinksSystem.ViewModels
         /// 销售管理
         /// </summary>
         public RelayCommand<TabControl> SalePageCommand { get; set; }
+        // <summary>
+        /// 首页
+        /// </summary>
+        public RelayCommand<TabControl> HomePageCommand { get; set; }
         #endregion
 
         #region 函数
@@ -217,6 +224,15 @@ namespace DrinksSystem.ViewModels
             TC = tc;
             SalesManagementView mySale = new SalesManagementView();
             AddItem("销售管理", mySale);
+        }
+        /// <summary>
+        /// 首页
+        /// </summary>
+        private void HomePage(TabControl tc)
+        {
+            TC = tc;
+            HomeView myHome = new HomeView();
+            AddItem("主页", myHome);
         }
         /// <summary>
         /// 进入收银台

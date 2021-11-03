@@ -26,7 +26,7 @@
 
 
         <!--窗口标题-->
-        <Grid  Background="#fbfbfd" Margin="0 0 0 10">
+        <Grid  Background="#ffffff" Margin="0 0 0 10">
             <TextBlock Text="{Binding CurrentUser,Mode=TwoWay}" VerticalAlignment="Center" FontSize="14" Foreground="#a4b0be" Margin="20 0 0 0"/>
 
             <Border HorizontalAlignment="Center" >
@@ -59,7 +59,7 @@
                     <RowDefinition Height="8*"/>
                 </Grid.RowDefinitions>
                 <!--等待区-->
-                <Border Background="#fbfbfd" CornerRadius="5" Margin="10 0 5 10">
+                <Border Background="#ffffff" CornerRadius="5" Margin="10 0 5 10">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"/>
@@ -70,7 +70,7 @@
                         <!--DataGrid表格-->
                         <DataGrid Grid.Row="1" Margin="10"  ItemsSource="{Binding WaitingAreaData}" SelectedItem="{Binding WaitingAreaEntity, Mode=TwoWay}" 
                   CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="Column" 
-                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" Background="#fbfbfd"
+                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" Background="#ffffff"
                   x:Name="yinDatagrid" controls:DataGridBehavior.RowNumbers="True" RowHeight="40">
 
                             <DataGrid.Columns >
@@ -137,7 +137,7 @@
                     </Grid>
                 </Border>
                 <!--销售区-->
-                <Border Grid.Row="1" Background="#fbfbfd" CornerRadius="5" Margin="10 0 5 10">
+                <Border Grid.Row="1" Background="#ffffff" CornerRadius="5" Margin="10 0 5 10">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"/>
@@ -149,7 +149,7 @@
                         <!--DataGrid表格-->
                         <DataGrid Grid.Row="1" Margin="10"  ItemsSource="{Binding SalesAreaData}" SelectedItem="{Binding SalesAreaEntity, Mode=TwoWay}" 
                   CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="Column" 
-                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" Background="#fbfbfd"
+                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" Background="#ffffff"
                   x:Name="yinDatagrid1" controls:DataGridBehavior.RowNumbers="True" RowHeight="70">
                             <DataGrid.Columns >
                                 <DataGridTemplateColumn Width="80"
@@ -255,7 +255,7 @@
                 </Border>
             </Grid>
             <!--产品区 操作区-->
-            <Border Grid.Column="1" Background="#fbfbfd" CornerRadius="5" Margin="5 0 10 10">
+            <Border Grid.Column="1" Background="#ffffff" CornerRadius="5" Margin="5 0 10 10">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.8*"/>

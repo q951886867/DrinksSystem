@@ -19,7 +19,7 @@
             <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
         <!--左侧导航栏-->
-        <Grid Grid.Column="0" Background="#fbfbfd">
+        <Grid Grid.Column="0" Background="#ffffff">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="12*"/>
@@ -36,6 +36,11 @@
                     <TreeViewItem  FontSize="14" Margin="0 15 0 0" >
                         <TreeViewItem.Header>
                             <StackPanel Orientation="Horizontal">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <i:InvokeCommandAction Command="{Binding HomePageCommand}" CommandParameter="{Binding ElementName=tab_Main}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                                 <TextBlock Foreground="#1d1d1f" Text="&#xe607;"   FontFamily="Resources/icon/#iconfont" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 10 3"/>
                                 <TextBlock Margin="8 0 0 0" Text="主页" />
                             </StackPanel>
@@ -142,7 +147,7 @@
                 <RowDefinition Height="12*"/>
             </Grid.RowDefinitions>
             <!--顶部状态栏-->
-            <Border BorderThickness="0 0 0 1" BorderBrush="#dfe4ea" Background="#fbfbfd">
+            <Border BorderThickness="0 0 0 1" BorderBrush="#dfe4ea" Background="#ffffff">
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                     <TextBlock Text="{Binding StaffName,Mode=TwoWay}" VerticalAlignment="Center" FontSize="14" Foreground="#a4b0be"/>
                     <Button HorizontalAlignment="Right" Foreground="#2c68ff"  Margin=" 20 0 50 0" Width="120" Height="35" Style="{StaticResource MaterialDesignOutlinedButton}"   BorderBrush="#2c68ff"
@@ -151,8 +156,8 @@
             </Border>
 
             <!--TabControl-->
-            <Border Grid.Row="1" Margin="15"  BorderBrush="#dfe4ea" BorderThickness="1" Background="#fbfbfd" CornerRadius="5">
-                <TabControl BorderThickness="0" Name="tab_Main" Background="#fbfbfd" Grid.Row="1" Grid.Column="1"  FontSize="14">
+            <Border Grid.Row="1" Margin="15"   CornerRadius="5" Background="#ffffff">
+                <TabControl BorderThickness="0" Name="tab_Main"  Grid.Row="1" Grid.Column="1"  FontSize="14">
                     <!-- simplest form -->
                             
                 </TabControl>

@@ -5,7 +5,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
              xmlns:page="clr-namespace:DrinksSystem.Resources.control" 
              xmlns:controls="clr-namespace:DrinksSystem.Resources.PublicClass"
-              Background="#fbfbfd">
+              Background="#ffffff">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
@@ -52,7 +52,7 @@
         <!--DataGrid表格-->
         <DataGrid Grid.Row="1" Margin="10"  ItemsSource="{Binding SaleOrder}" SelectedItem="{Binding SaleOrderSelectEntity, Mode=TwoWay}" 
                   CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="Column" RowHeight="60"
-                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" Background="#fbfbfd"
+                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" Background="#ffffff"
                   x:Name="yinDatagrid" controls:DataGridBehavior.RowNumbers="True" >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -104,7 +104,7 @@
         <!--DataGrid表格-->
         <DataGrid  Grid.Row="2" Margin="10"  ItemsSource="{Binding SaleOrderDetail}"
                   CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="Column" 
-                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" Background="#fbfbfd"
+                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" Background="#ffffff"
                   x:Name="Datagrid" controls:DataGridBehavior.RowNumbers="True" RowHeight="60">
             <DataGrid.Columns >
                 <DataGridTemplateColumn Width="80"

@@ -4,7 +4,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:controls="clr-namespace:DrinksSystem.Resources.PublicClass"
-              Background="#fbfbfd">
+              Background="#ffffff">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -92,7 +92,7 @@
             <!--DataGrid表格-->
             <DataGrid Grid.Row="1" Margin="10"  ItemsSource="{Binding Dictionary}" SelectedItem="{Binding DictionaryEntity, Mode=TwoWay}" 
                   CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="Column" 
-                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" Background="#fbfbfd"
+                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" Background="#ffffff"
                   x:Name="yinDatagrid" controls:DataGridBehavior.RowNumbers="True" RowHeight="70">
                 <DataGrid.Columns >
                     <DataGridTemplateColumn Width="100"
