@@ -27,6 +27,7 @@
           <ScalarProperty Name="promotionalIntegral" ColumnName="promotionalIntegral" />
           <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
           <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="rechargeTime" ColumnName="rechargeTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

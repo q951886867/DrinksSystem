@@ -95,6 +95,13 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="充值时间" Width="1.5*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Center" Foreground="#1d1d1f" VerticalAlignment="Center" Text="{Binding rechargeTime ,StringFormat='yyyy/MM/dd HH:mm:ss'}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="备注" Width="1*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

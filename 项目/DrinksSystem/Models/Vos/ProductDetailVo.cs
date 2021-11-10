@@ -11,6 +11,7 @@ namespace DrinksSystem.Models.Vos
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public string productName { get; set; }//产品名称
+        public byte[] productImage { get; set; }//产品图片
         //小计
         private decimal? _Subtotal { get; set; }
         public decimal? Subtotal
@@ -30,8 +31,8 @@ namespace DrinksSystem.Models.Vos
         }
 
         //数量
-        private decimal _Quantity { get; set; }
-        public decimal quantity
+        private decimal? _Quantity { get; set; }
+        public decimal? quantity
         {
             get
             {
@@ -46,5 +47,6 @@ namespace DrinksSystem.Models.Vos
                 }
             }
         }
+        
     }
 }

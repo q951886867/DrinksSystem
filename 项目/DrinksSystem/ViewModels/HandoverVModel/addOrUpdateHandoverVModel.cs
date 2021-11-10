@@ -150,7 +150,7 @@ namespace DrinksSystem.ViewModels.HandoverVModel
         {
             if (ifCheckout)
             {
-                if (StartDate!=null&& StartTime!=null&& EndDate!= null && EndTime!= null && HandoverData.staffID!=null && Convert.ToDateTime(StartTime)<Convert.ToDateTime(EndTime))
+                if (StartDate!=null&& StartTime!=null&& EndDate!= null && EndTime!= null && HandoverData.staffID!=null)
                 {
                     //起始
                     var dateStartDate = Convert.ToDateTime(StartDate);//字符串转换DateTime
@@ -168,22 +168,26 @@ namespace DrinksSystem.ViewModels.HandoverVModel
 
                     DateTime start = Convert.ToDateTime(startdatetime);
                     DateTime end = Convert.ToDateTime(enddatetime);
-                    //根据选中的时间段之间 和当前的员工ID 查询订单
-                    var list = (from tb in myModel.B_SalesRecord
-                                where tb.staffID == HandoverData.staffID && tb.salesTime >= start && tb.salesTime <= end
-                                select tb).ToList();
-
-                    //循环计算微信收入金额 和 现金收入金额
-                    decimal cash = 0; 
-                    decimal wechat = 0; 
-                    for (int i = 0; i < list.Count; i++)
+                    if (start < end)
                     {
-                        cash += Convert.ToDecimal(list[i].cashPay);//现金
-                        wechat += Convert.ToDecimal(list[i].wechatPay);//微信
+
+                        //根据选中的时间段之间 和当前的员工ID 查询订单
+                        var list = (from tb in myModel.B_SalesRecord
+                                    where tb.staffID == HandoverData.staffID && tb.salesTime >= start && tb.salesTime <= end
+                                    select tb).ToList();
+
+                        //循环计算微信收入金额 和 现金收入金额
+                        decimal cash = 0;
+                        decimal wechat = 0;
+                        for (int i = 0; i < list.Count; i++)
+                        {
+                            cash += Convert.ToDecimal(list[i].cashPay);//现金
+                            wechat += Convert.ToDecimal(list[i].wechatPay);//微信
+                        }
+                        HandoverData.cashIncome = cash;
+                        HandoverData.wechatIncome = wechat;
+                        TextChange();//更新营业总额
                     }
-                    HandoverData.cashIncome = cash;
-                    HandoverData.wechatIncome = wechat;
-                    TextChange();//更新营业总额
                 }
             }
         }

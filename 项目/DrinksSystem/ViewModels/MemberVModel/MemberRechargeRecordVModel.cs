@@ -73,6 +73,7 @@ namespace DrinksSystem.ViewModels.MemberVModel
                             promotionalAmount = tbMemberRechargeRecord.promotionalAmount,
                             promotionalIntegral = tbMemberRechargeRecord.promotionalIntegral,
                             totalAmount = tbMemberRechargeRecord.totalAmount,
+                            rechargeTime = tbMemberRechargeRecord.rechargeTime,
                             remark = tbMemberRechargeRecord.remark,
                         }).ToList();
             if (condition != "")

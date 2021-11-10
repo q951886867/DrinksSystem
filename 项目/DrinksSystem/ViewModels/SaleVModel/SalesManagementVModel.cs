@@ -127,6 +127,7 @@ namespace DrinksSystem.ViewModels.SaleVModel
         {
             var list = (from tb in myModel.B_SalesRecord
                         join tbStaff in myModel.S_Staff on tb.staffID equals tbStaff.staffID
+                        orderby tb.salesRecordID descending
                         select new SalesOrderVos
                         {
                             salesRecordID = tb.salesRecordID,

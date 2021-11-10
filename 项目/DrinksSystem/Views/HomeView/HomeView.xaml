@@ -4,10 +4,367 @@
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
              xmlns:page="clr-namespace:DrinksSystem.Resources.control" 
              xmlns:controls="clr-namespace:DrinksSystem.Resources.PublicClass"
-             Background="#fbfbfd" Width="1200" Height="900">
+             >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=myChart}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!--Width="1200" Height="900"-->
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" >
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <Grid>
-        <TextBlock Text="123"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="2.3*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="15 20 15 0">
+            <Border  Background="#fff" CornerRadius="10">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20" Direction="-100" RenderingBias="Quality" ShadowDepth="1" Color="#FFe6e8ec" Opacity="0.5"/>
+                </Border.Effect>
+                <Grid>
+                    <ComboBox x:Name="myComboBox" Width="200" materialDesign:HintAssist.Hint="OS" Margin="15 0 0 0" HorizontalAlignment="Left"
+                                  materialDesign:HintAssist.HintOpacity=".26" Height="35"  pu:ComboBoxHelper.CornerRadius="5"
+                                 ItemsSource="{Binding TimeData}" DisplayMemberPath="timeName" SelectedValuePath="timeID"
+                              SelectedValue="{Binding ComboBoxSelectedValue,Mode=TwoWay}" 
+                               Padding="10 5">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding ComboBoxChangedCommand}"  CommandParameter="{Binding ElementName=myChart}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Border  Grid.Column="0" Background="#ffffff" CornerRadius="10" Margin="15 20">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20" Direction="-100" RenderingBias="Quality" ShadowDepth="1" Color="#FFe6e8ec" Opacity="0.5"/>
+                </Border.Effect>
+                <StackPanel Margin="20 25">
+                    <Grid Margin="0 0 0 10" >
+                        <TextBlock Text="{Binding AmountData[0].DataType}" Foreground="#1d1d1f" FontSize="14"/>
+                        <materialDesign:PackIcon Kind="TrendingUp" Foreground="#50E997" HorizontalAlignment="Right">
+                            <materialDesign:PackIcon.Style>
+                                <Style TargetType="materialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding AmountData[0].IsUp}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding AmountData[0].IsUp}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </materialDesign:PackIcon.Style>
+                        </materialDesign:PackIcon>
+                        <materialDesign:PackIcon Kind="TrendingDown" Foreground="#ff4d4f" HorizontalAlignment="Right" >
+                            <materialDesign:PackIcon.Style>
+                                <Style TargetType="materialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding AmountData[0].IsUp}" Value="False">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding AmountData[0].IsUp}" Value="True">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </materialDesign:PackIcon.Style>
+                        </materialDesign:PackIcon>
+                    </Grid>
+                    <TextBlock Margin="0 0 0 20" Text="{Binding AmountData[0].TotalAmount}" Foreground="#1d1d1f" FontSize="26" FontWeight="Bold"/>
+                    <Grid Margin="0 0 0 15" >
+                        <ProgressBar Height="18" MinWidth="225" Background="#1E3F3F3F" Foreground="#ff4d4f"  HorizontalAlignment="Left"
+                                  pu:ProgressBarHelper.AnimateTo="{Binding AmountData[0].Percentage}" pu:ProgressBarHelper.IsPercentVisible="True" pu:ProgressBarHelper.CornerRadius="7"/>
+                    </Grid>
+                    <TextBlock  Text="{Binding AmountData[0].ThanLast}" Foreground="#a4b0be" />
+                </StackPanel>
+            </Border>
+
+            <Border   Grid.Column="1" Background="#ffffff" CornerRadius="10" Margin="15 20">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20" Direction="-100" RenderingBias="Quality" ShadowDepth="1" Color="#FFe6e8ec" Opacity="0.5"/>
+                </Border.Effect>
+                <StackPanel Margin="20 25">
+                    <Grid Margin="0 0 0 10" >
+                        <TextBlock Text="{Binding AmountData[1].DataType}" Foreground="#1d1d1f" FontSize="14" />
+                        <materialDesign:PackIcon Kind="TrendingUp" Foreground="#50E997" HorizontalAlignment="Right">
+                            <materialDesign:PackIcon.Style>
+                                <Style TargetType="materialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding AmountData[1].IsUp}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding AmountData[1].IsUp}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </materialDesign:PackIcon.Style>
+                        </materialDesign:PackIcon>
+                        <materialDesign:PackIcon Kind="TrendingDown" Foreground="#ff4d4f" HorizontalAlignment="Right" >
+                            <materialDesign:PackIcon.Style>
+                                <Style TargetType="materialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding AmountData[1].IsUp}" Value="False">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding AmountData[1].IsUp}" Value="True">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </materialDesign:PackIcon.Style>
+                        </materialDesign:PackIcon>
+                    </Grid>
+                    <TextBlock Margin="0 0 0 20" Text="{Binding AmountData[1].TotalAmount}" Foreground="#1d1d1f" FontSize="26" FontWeight="Bold"/>
+                    <Grid Margin="0 0 0 15" >
+                        <ProgressBar Height="18" MinWidth="225" Background="#1E3F3F3F" Foreground="#50E997"  HorizontalAlignment="Left"
+                                  pu:ProgressBarHelper.AnimateTo="{Binding AmountData[1].Percentage}" pu:ProgressBarHelper.IsPercentVisible="True" pu:ProgressBarHelper.CornerRadius="7"/>
+                    </Grid>
+                    <TextBlock  Text="{Binding AmountData[1].ThanLast}" Foreground="#a4b0be" />
+                </StackPanel>
+            </Border>
+
+            <Border   Grid.Column="2" Background="#ffffff" CornerRadius="10" Margin="15 20">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20" Direction="-100" RenderingBias="Quality" ShadowDepth="1" Color="#FFe6e8ec" Opacity="0.5"/>
+                </Border.Effect>
+                <StackPanel Margin="20 25">
+                    <Grid Margin="0 0 0 10" >
+                        <TextBlock Text="{Binding AmountData[2].DataType}" Foreground="#1d1d1f" FontSize="14" />
+                        <materialDesign:PackIcon Kind="TrendingUp" Foreground="#50E997" HorizontalAlignment="Right">
+                            <materialDesign:PackIcon.Style>
+                                <Style TargetType="materialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding AmountData[2].IsUp}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding AmountData[2].IsUp}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </materialDesign:PackIcon.Style>
+                        </materialDesign:PackIcon>
+                        <materialDesign:PackIcon Kind="TrendingDown" Foreground="#ff4d4f" HorizontalAlignment="Right" >
+                            <materialDesign:PackIcon.Style>
+                                <Style TargetType="materialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding AmountData[2].IsUp}" Value="False">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding AmountData[2].IsUp}" Value="True">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </materialDesign:PackIcon.Style>
+                        </materialDesign:PackIcon>
+                    </Grid>
+                    <TextBlock Margin="0 0 0 20" Text="{Binding AmountData[2].TotalAmount}" Foreground="#1d1d1f" FontSize="26" FontWeight="Bold"/>
+                    <Grid Margin="0 0 0 15" >
+                        <ProgressBar Height="18" MinWidth="225" Background="#1E3F3F3F" Foreground="#f4d142"  HorizontalAlignment="Left"
+                                  pu:ProgressBarHelper.AnimateTo="{Binding AmountData[2].Percentage}" pu:ProgressBarHelper.IsPercentVisible="True" pu:ProgressBarHelper.CornerRadius="7"/>
+                    </Grid>
+                    <TextBlock  Text="{Binding AmountData[2].ThanLast}" Foreground="#a4b0be" />
+                </StackPanel>
+            </Border>
+
+            <Border   Grid.Column="3" Background="#ffffff" CornerRadius="10" Margin="15 20">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20" Direction="-100" RenderingBias="Quality" ShadowDepth="1" Color="#FFe6e8ec" Opacity="0.5"/>
+                </Border.Effect>
+                <StackPanel Margin="20 25">
+                    <Grid Margin="0 0 0 10" >
+                        <TextBlock Text="{Binding AmountData[3].DataType}" Foreground="#1d1d1f" FontSize="14" />
+                        <materialDesign:PackIcon Kind="TrendingUp" Foreground="#50E997" HorizontalAlignment="Right">
+                            <materialDesign:PackIcon.Style>
+                                <Style TargetType="materialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding AmountData[3].IsUp}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding AmountData[3].IsUp}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </materialDesign:PackIcon.Style>
+                        </materialDesign:PackIcon>
+                        <materialDesign:PackIcon Kind="TrendingDown" Foreground="#ff4d4f" HorizontalAlignment="Right">
+                            <materialDesign:PackIcon.Style>
+                                <Style TargetType="materialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding AmountData[3].IsUp}" Value="False">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding AmountData[3].IsUp}" Value="True">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </materialDesign:PackIcon.Style>
+                        </materialDesign:PackIcon>
+                    </Grid>
+                    <TextBlock Margin="0 0 0 20" Text="{Binding AmountData[3].TotalAmount}" Foreground="#1d1d1f" FontSize="26" FontWeight="Bold"/>
+                    <Grid Margin="0 0 0 15" >
+                        <ProgressBar Height="18" MinWidth="225" Background="#1E3F3F3F" Foreground="#29daea"  HorizontalAlignment="Left"
+                                  pu:ProgressBarHelper.AnimateTo="100"  pu:ProgressBarHelper.CornerRadius="7"/>
+                    </Grid>
+                    <TextBlock  Text="{Binding AmountData[3].ThanLast}" Foreground="#a4b0be" />
+                </StackPanel>
+            </Border>
+
+            <Border   Grid.Column="4" Background="#ffffff" CornerRadius="10" Margin="15 20">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20" Direction="-100" RenderingBias="Quality" ShadowDepth="1" Color="#FFe6e8ec" Opacity="0.5"/>
+                </Border.Effect>
+                <StackPanel Margin="20 25">
+                    <Grid Margin="0 0 0 10" >
+                        <TextBlock Text="{Binding AmountData[4].DataType}" Foreground="#1d1d1f" FontSize="14" />
+                        <materialDesign:PackIcon Kind="TrendingUp" Foreground="#50E997" HorizontalAlignment="Right">
+                            <materialDesign:PackIcon.Style>
+                                <Style TargetType="materialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding AmountData[4].IsUp}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding AmountData[4].IsUp}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </materialDesign:PackIcon.Style>
+                        </materialDesign:PackIcon>
+                        <materialDesign:PackIcon Kind="TrendingDown" Foreground="#ff4d4f" HorizontalAlignment="Right" >
+                            <materialDesign:PackIcon.Style>
+                                <Style TargetType="materialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding AmountData[4].IsUp}" Value="False">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding AmountData[4].IsUp}" Value="True">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </materialDesign:PackIcon.Style>
+                        </materialDesign:PackIcon>
+                    </Grid>
+                    <TextBlock Margin="0 0 0 20" Text="{Binding AmountData[4].TotalAmount}" Foreground="#1d1d1f" FontSize="24" FontWeight="Bold"/>
+                    <Grid Margin="0 0 0 15" >
+                        <ProgressBar Height="18" MinWidth="225" Background="#1E3F3F3F" Foreground="#5352ed"  HorizontalAlignment="Left"
+                                  pu:ProgressBarHelper.AnimateTo="100"  pu:ProgressBarHelper.CornerRadius="7"/>
+                    </Grid>
+                    <TextBlock  Text="{Binding AmountData[4].ThanLast}" Foreground="#a4b0be" />
+                </StackPanel>
+            </Border>
+            
+        </Grid>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Row="1" Grid.Column="0" Background="#fff" Margin="15 5 15 20" CornerRadius="10">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20" Direction="-100" RenderingBias="Quality" ShadowDepth="1" Color="#FFe6e8ec" Opacity="0.5"/>
+                </Border.Effect>
+                <lvc:CartesianChart x:Name="myChart" Hoverable="False"   Margin="15" Grid.Column="1" >
+                    <lvc:CartesianChart.Series>
+                        <lvc:LineSeries   Stroke="#2c68ff" LineSmoothness="0.7"  Fill="#332C51FF"  PointGeometrySize="15"  Values="{Binding SeriesValues}"/>
+                    </lvc:CartesianChart.Series>
+                    <lvc:CartesianChart.AxisX >
+                        <lvc:Axis MinValue="0" ShowLabels="True"   Labels="{Binding AxisXLabels}">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator Visibility="Hidden" StrokeThickness="1.5" StrokeDashArray="0" Stroke="#404F56" >
+                                </lvc:Separator>
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis MinValue="0"   ShowLabels="True"  />
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+            </Border>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>    
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Background="#fff" Margin="15 5 15 15" CornerRadius="10">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="20" Direction="-100" RenderingBias="Quality" ShadowDepth="1" Color="#FFe6e8ec" Opacity="0.5"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="8*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="{Binding ProductSalesTitle}" Margin="20 0" VerticalAlignment="Center" Foreground="#1d1d1f"/>
+                        <DataGrid Grid.Row="1" Margin="15 0 15 25"  ItemsSource="{Binding ProductSalesData}" 
+                  CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="None" pu:DataGridHelper.HeaderBackground="#fff" pu:DataGridHelper.HeaderForeground="#a4b0be"
+                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" Background="#ffffff"  
+                  x:Name="yinDatagrid" controls:DataGridBehavior.RowNumbers="True" RowHeight="111" pu:DataGridHelper.ColumnHorizontalContentAlignment="Center">
+
+                            <DataGrid.Columns >
+                                <DataGridTemplateColumn Width="80"
+                                        Header="序号"
+                                        IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock HorizontalAlignment="Center" Foreground="#8d8f8f" VerticalAlignment="Center" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}, Path=Header}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="图片" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid Background="Transparent" Width="100" Height="100">
+                                                <Image Source="{Binding productImage}" Stretch="Fill" Width="100" Height="100" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="产品名称" Width="2.5*" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock   HorizontalAlignment="Center" Foreground="#8d8f8f" VerticalAlignment="Center" Text="{Binding productName}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="销量" Width="1*" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock   HorizontalAlignment="Center" Foreground="#8d8f8f" VerticalAlignment="Center" Text="{Binding sales}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

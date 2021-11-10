@@ -23,6 +23,7 @@ namespace DrinksSystem.Views.HomeView
         public HomeView()
         {
             InitializeComponent();
+            DataContext = new DrinksSystem.ViewModels.HomeVModel.HomeVModel();
         }
     }
 }

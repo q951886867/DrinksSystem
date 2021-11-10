@@ -174,6 +174,7 @@ namespace DrinksSystem.ViewModels.MemberVModel
                                 myMemberRechargeRecord.memberID = list.memberID;//会员ID
                                 myMemberRechargeRecord.rechargeAmount = rechargeamount;//充值金额
                                 myMemberRechargeRecord.promotionalAmount = promotionalamount;//赠送金额
+                                myMemberRechargeRecord.rechargeTime = DateTime.Now;//充值时间
                                 myMemberRechargeRecord.remark = "开户充值";
                                 myMemberRechargeRecord.totalAmount = myMemberRechargeRecord.rechargeAmount + myMemberRechargeRecord.promotionalAmount;//合计金额
                                 myModel.B_MemberRechargeRecord.Add(myMemberRechargeRecord);
@@ -242,6 +243,7 @@ namespace DrinksSystem.ViewModels.MemberVModel
                                 myMemberRechargeRecord.staffID = StaffIDNowID;//当前用户ID
                                 myMemberRechargeRecord.rechargeAmount = myMember.memberBalance - MembershipAmount;//充值金额 正数和负数
                                 myMemberRechargeRecord.promotionalAmount = 0;//赠送金额
+                                myMemberRechargeRecord.rechargeTime = DateTime.Now;//充值时间
                                 myMemberRechargeRecord.promotionalIntegral = 0;//赠送积分
                                 myMemberRechargeRecord.totalAmount = myMemberRechargeRecord.rechargeAmount;//合计金额
                                 myMemberRechargeRecord.remark = "调整金额";//备注

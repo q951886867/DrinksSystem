@@ -22,5 +22,6 @@ namespace DrinksSystem.Models
         public Nullable<decimal> promotionalIntegral { get; set; }
         public Nullable<decimal> totalAmount { get; set; }
         public string remark { get; set; }
+        public Nullable<System.DateTime> rechargeTime { get; set; }
     }
 }

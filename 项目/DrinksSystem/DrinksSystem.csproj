@@ -136,6 +136,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vos\HandoverVo.cs" />
+    <Compile Include="Models\Vos\HomeVos.cs" />
     <Compile Include="Models\Vos\MemberRechargeRecordVo.cs" />
     <Compile Include="Models\Vos\ProductDetailVo.cs" />
     <Compile Include="Models\Vos\ProductVo.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="ViewModels\DictionaryVModel\DictionaryVModel.cs" />
     <Compile Include="ViewModels\HandoverVModel\addOrUpdateHandoverVModel.cs" />
     <Compile Include="ViewModels\HandoverVModel\HandoverVModel.cs" />
+    <Compile Include="ViewModels\HomeVModel\HomeVModel.cs" />
     <Compile Include="ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MemberVModel\MemberInformationVModel.cs" />
@@ -392,6 +394,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\ima\冰美式.jpg" />
+    <Resource Include="Resources\ima\已锁定.jpg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -402,7 +405,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Resource Include="Resources\ima\已锁定.jpg" />
     <Content Include="Resources\Panuon.UI.Silver.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -664,7 +664,7 @@ namespace DrinksSystem.ViewModels.CheckoutCounterVModel
                 for (int i = 0; i < SalesAreaData.Count(); i++)
                 {
                     totalAmount += SalesAreaData[i].quantity * SalesAreaData[i].price;//产品总金额
-                    totalQuantity += SalesAreaData[i].quantity;//产品总条数
+                    totalQuantity += Convert.ToDecimal(SalesAreaData[i].quantity);//产品总条数
                 }
                 TotalQuantity = totalQuantity;//产品总条数
                 TotalAmount = totalAmount;//产品总金额

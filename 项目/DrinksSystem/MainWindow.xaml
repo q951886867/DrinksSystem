@@ -156,12 +156,20 @@
             </Border>
 
             <!--TabControl-->
-            <Border Grid.Row="1" Margin="15"   CornerRadius="5" Background="#ffffff">
-                <TabControl BorderThickness="0" Name="tab_Main"  Grid.Row="1" Grid.Column="1"  FontSize="14">
+            <Grid Grid.Row="1" Margin="15">
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0"  CornerRadius="5" Background="#ffffff">
+                </Border>
+                <TabControl BorderThickness="0" Name="tab_Main" Background="#f3f5f8"  Grid.Row="0" Grid.RowSpan="2"  FontSize="14">
                     <!-- simplest form -->
                             
                 </TabControl>
-            </Border>
+                
+            </Grid>
         </Grid>
     </Grid>
 </Window>

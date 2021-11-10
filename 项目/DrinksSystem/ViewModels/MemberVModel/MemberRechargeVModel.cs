@@ -186,6 +186,7 @@ namespace DrinksSystem.ViewModels.MemberVModel
                             myMemberRechargeRecord.promotionalAmount = PromotionalAmount;//赠送金额
                             myMemberRechargeRecord.promotionalIntegral = 0;//赠送积分
                             myMemberRechargeRecord.totalAmount = RechargeAmount + PromotionalAmount;//合计金额
+                            myMemberRechargeRecord.rechargeTime = DateTime.Now;//充值时间
                             myMemberRechargeRecord.remark = "会员充值";//备注
                             myModel.B_MemberRechargeRecord.Add(myMemberRechargeRecord);
                             if (myModel.SaveChanges() > 0)
